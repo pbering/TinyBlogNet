@@ -1,0 +1,7 @@
+﻿@model IEnumerable<Tag>
+<ul class="list-unstyled">
+    @foreach (var tag in @Model)
+    {
+        <li><i class="glyphicon glyphicon-tag"></i>&nbsp;<a href="@tag.Url">@tag.Name</a></li>
+    }
+</ul>

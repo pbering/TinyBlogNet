@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Post>
+@{
+    ViewBag.Title = "Tags";
+}
+
+@foreach (var post in Model)
+{
+    Html.RenderPartial("~/Views/Shared/_Post.cshtml", post);
+}
