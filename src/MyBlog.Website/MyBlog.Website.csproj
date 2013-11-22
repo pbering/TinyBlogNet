@@ -147,12 +147,6 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -164,6 +158,7 @@
     <Content Include="Views\Tags\All.cshtml" />
     <Content Include="Views\Content\Index.cshtml" />
     <Content Include="Views\Shared\_Post.cshtml" />
+    <None Include="Web.Production.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TinyBlogNet\TinyBlogNet.csproj">
@@ -211,4 +206,7 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
+  <Target Name="AfterBuild">
+    <TransformXml Condition=" '$(Environment)' != '' " Source="Web.config" Transform="Web.$(Environment).config" Destination="Web.config" />
+  </Target>
 </Project>
