@@ -207,6 +207,8 @@
   <Target Name="AfterBuild">
   </Target> -->
   <Target Name="AfterBuild">
+    <Message Condition=" '$(Environment)' != '' " Text="Transforming Web.config for environment '$(Environment)'..." Importance="High" />
     <TransformXml Condition=" '$(Environment)' != '' " Source="Web.config" Transform="Web.$(Environment).config" Destination="Web.config" />
+    <Message Condition=" '$(Environment)' != '' " Text="Transforming Web.config completed!" Importance="High" />
   </Target>
 </Project>
