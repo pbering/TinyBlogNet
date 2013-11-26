@@ -7,11 +7,11 @@ using TinyBlogNet.IO;
 
 namespace MyBlog.Website.Controllers
 {
-    public class PostController : Controller
+    public class PostsController : Controller
     {
         private readonly PostRepository _postRepository;
 
-        public PostController()
+        public PostsController()
         {
             var dataFolder = ConfigurationManager.AppSettings["MyBlog:DataFolderRoot"];
             var physicalPath = HostingEnvironment.MapPath(Path.Combine(dataFolder, "Posts"));
@@ -29,7 +29,7 @@ namespace MyBlog.Website.Controllers
                 return HttpNotFound();
             }
 
-            return View("~/Views/Post/Index.cshtml", model);
+            return View("~/Views/Posts/Index.cshtml", model);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace TinyBlogNet
             _file = file;
 
             Name = _file.Name;
-            Url = new Uri(string.Format("/post/{0}/", _file.Name.ToLowerInvariant()), UriKind.Relative);
+            Url = new Uri(string.Format("/posts/{0}/", _file.Name.ToLowerInvariant()), UriKind.Relative);
             Tags = new ReadOnlyCollection<Tag>(Enumerable.Empty<Tag>().ToList());
         }
 
