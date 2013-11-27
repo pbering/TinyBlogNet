@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Configuration;
-using System.IO;
 using System.Linq;
 using System.ServiceModel.Syndication;
-using System.Web.Hosting;
 using System.Web.Mvc;
 using TinyBlogNet;
-using TinyBlogNet.IO;
 
 namespace MyBlog.Website.Controllers
 {
@@ -14,12 +10,9 @@ namespace MyBlog.Website.Controllers
     {
         private readonly PostRepository _postRepository;
 
-        public RssController()
+        public RssController(PostRepository postRepository)
         {
-            var dataFolder = ConfigurationManager.AppSettings["MyBlog:DataFolderRoot"];
-            var physicalPath = HostingEnvironment.MapPath(Path.Combine(dataFolder, "Posts"));
-
-            _postRepository = new PostRepository(new FileSystem(physicalPath), new Cache());
+            _postRepository = postRepository;
         }
 
         [OutputCache(CacheProfile = "DefaultRss")]
@@ -29,7 +22,7 @@ namespace MyBlog.Website.Controllers
 
             var feed = new SyndicationFeed(
                 "SitecorePerf Blog",
-                "This is a test feed",
+                "Feed of all posts",
                 new Uri(serverUrl + "/rss.xml"),
                 "1",
                 DateTime.Now)

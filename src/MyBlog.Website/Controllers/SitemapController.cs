@@ -1,9 +1,5 @@
-﻿using System.Configuration;
-using System.IO;
-using System.Web.Hosting;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using TinyBlogNet;
-using TinyBlogNet.IO;
 
 namespace MyBlog.Website.Controllers
 {
@@ -12,14 +8,10 @@ namespace MyBlog.Website.Controllers
         private readonly PostRepository _postRepository;
         private readonly TextRepository _textRepository;
 
-        public SitemapController()
+        public SitemapController(PostRepository postRepository, TextRepository textRepository)
         {
-            var dataFolder = ConfigurationManager.AppSettings["MyBlog:DataFolderRoot"];
-            var postsPhysicalPath = HostingEnvironment.MapPath(Path.Combine(dataFolder, "Posts"));
-            var textsPhysicalPath = HostingEnvironment.MapPath(dataFolder);
-
-            _postRepository = new PostRepository(new FileSystem(postsPhysicalPath), new Cache());
-            _textRepository = new TextRepository(new FileSystem(textsPhysicalPath), new Cache());
+            _postRepository = postRepository;
+            _textRepository = textRepository;
         }
 
         [OutputCache(CacheProfile = "DefaultSitemap")]

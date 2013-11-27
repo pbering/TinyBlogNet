@@ -1,10 +1,6 @@
-﻿using System.Configuration;
-using System.IO;
-using System.Linq;
-using System.Web.Hosting;
+﻿using System.Linq;
 using System.Web.Mvc;
 using TinyBlogNet;
-using TinyBlogNet.IO;
 
 namespace MyBlog.Website.Controllers
 {
@@ -12,12 +8,9 @@ namespace MyBlog.Website.Controllers
     {
         private readonly PostRepository _postRepository;
 
-        public HomeController()
+        public HomeController(PostRepository postRepository)
         {
-            var dataFolder = ConfigurationManager.AppSettings["MyBlog:DataFolderRoot"];
-            var physicalPath = HostingEnvironment.MapPath(Path.Combine(dataFolder, "Posts"));
-
-            _postRepository = new PostRepository(new FileSystem(physicalPath), new Cache());
+            _postRepository = postRepository;
         }
 
         [OutputCache(CacheProfile = "DefaultLight")]
