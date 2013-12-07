@@ -9,7 +9,7 @@ namespace MyBlog.Website.App_Start
         {
             routes.LowercaseUrls = true;
             routes.AppendTrailingSlash = true;
-            
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute("Sitemap", "sitemap.xml",
@@ -24,6 +24,13 @@ namespace MyBlog.Website.App_Start
                 {
                     controller = "Rss",
                     action = "Index"
+                });
+
+            routes.MapRoute("NotFound", "error/notfound",
+                new
+                {
+                    controller = "Error",
+                    action = "NotFound"
                 });
 
             routes.MapRoute("Direct", "{controller}/{name}",

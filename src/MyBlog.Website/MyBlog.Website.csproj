@@ -124,6 +124,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
@@ -168,6 +169,7 @@
     <Content Include="Views\Tags\All.cshtml" />
     <Content Include="Views\Content\Index.cshtml" />
     <Content Include="Views\Shared\_Post.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
     <None Include="Web.Production.config" />
   </ItemGroup>
   <ItemGroup>
