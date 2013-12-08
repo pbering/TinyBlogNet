@@ -1,6 +1,52 @@
-﻿body {
+﻿@import url("//fonts.googleapis.com/css?family=Droid+Sans:400,700");
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../../fonts/glyphicons-halflings-regular.eot');
+  src: url('../../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
 }
 
-footer {
-	
+body {
+    font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #888888;
+    background-color: #060606;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #ffffff;
+}
+
+hr {
+  border-top: 1px solid #282828;
+}
+
+.well {
+  background-color: #151515;
+  border: 1px solid #030303;
+}
+
+a {
+  color: #2a9fd6;
+}
+
+a:hover,
+a:focus {
+  color: #2a9fd6;
+}
+
+.navbar {
+  border-bottom: 1px solid #282828;
+}
+
