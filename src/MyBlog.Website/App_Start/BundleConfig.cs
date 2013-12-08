@@ -17,6 +17,7 @@ namespace MyBlog.Website.App_Start
                 "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/Site").Include(
+                "~/Content/Css/font.css",
                 "~/Content/Css/bootstrap.css",
                 "~/Content/Css/site.css"));
         }
