@@ -140,7 +140,7 @@
     <Content Include="Content\Css\bootstrap.css" />
     <Content Include="Content\Css\Font.css" />
     <Content Include="favicon.ico" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Css\Site.css" />
     <Content Include="robots.txt" />
@@ -149,9 +149,9 @@
     <Content Include="App_Data\about.md" />
     <Content Include="App_Data\Posts\this-is-a-test-two.md" />
     <Content Include="App_Data\Posts\this-is-a-test-three.md" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
