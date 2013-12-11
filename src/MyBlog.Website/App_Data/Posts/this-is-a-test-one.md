@@ -11,6 +11,9 @@ Hello **TinyBlogNet**
 1. test
 1. test
 
+***Gist***
+<script src="https://gist.github.com/pbering/7821617.js"></script>
+
 Lorem ipsum dolor sit amet, ex ipsum cetero feugiat pro
 
     public class Hello 
