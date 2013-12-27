@@ -21,7 +21,7 @@ namespace MyBlog.Website.Controllers
             var serverUrl = ControllerContext.RequestContext.HttpContext.Request.GetServerUrl();
 
             var feed = new SyndicationFeed(
-                "SitecorePerf Blog",
+                "perbering.com",
                 "Feed of all posts",
                 new Uri(serverUrl + "/rss.xml"),
                 "1",

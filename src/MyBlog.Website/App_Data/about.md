@@ -1,10 +1,8 @@
 ---
-title: About
+title: About me
 ---
-## About ##
+## About me ##
 
-Lorem ipsum dolor sit amet, ex ipsum cetero feugiat pro, qui no affert nostro. Ne noluisse appellantur qui, solet deserunt eam et. Ei quis indoctum nec. Augue laudem mea ut, purto instructior et mel, ex mel iudico consectetuer. No est nihil efficiantur, modus offendit pertinax mel id, saperet invidunt explicari vix at. No vim stet antiopam patrioque, ullum falli reprehendunt an usu.
+![Gravatar image, painting by Kim Kirk Nielsen](//www.gravatar.com/avatar/c9ab6c041d5ec85d3a9bb927f1bf9413?s=100px)
 
-Lorem ipsum dolor sit amet, ex ipsum cetero feugiat pro, qui no affert nostro. Ne noluisse appellantur qui, solet deserunt eam et. Ei quis indoctum nec. Augue laudem mea ut, purto instructior et mel, ex mel iudico consectetuer. No est nihil efficiantur, modus offendit pertinax mel id, saperet invidunt explicari vix at. No vim stet antiopam patrioque, ullum falli reprehendunt an usu.
-
-Lorem ipsum dolor sit amet, ex ipsum cetero feugiat pro, qui no affert nostro. Ne noluisse appellantur qui, solet deserunt eam et. Ei quis indoctum nec. Augue laudem mea ut, purto instructior et mel, ex mel iudico consectetuer. No est nihil efficiantur, modus offendit pertinax mel id, saperet invidunt explicari vix at. No vim stet antiopam patrioque, ullum falli reprehendunt an usu.
+I'm a software developer working at a danish consulting firm Codehouse for the past many years. My work here is primarily on the Sitecore CMS platform both developing and designing complete solutions for our customers.
