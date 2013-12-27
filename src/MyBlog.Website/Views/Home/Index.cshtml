@@ -6,12 +6,16 @@
 @foreach (var post in Model)
 {
     Html.RenderPartial("~/Views/Shared/_Post.cshtml", post);
+    <hr />
 }
 
 @section Well
 {
     <div class="well">
         <h4>Hi</h4>
-        <p>Welcome to my blog! I mostly write stuff about Sitecore performance and optimizations for production environments and testing as well.</p>
+        <p>
+            Welcome to my blog! I mostly write stuff about Sitecore performance and
+            optimizations for production environments and stuff about testing as well.
+        </p>
     </div>
 }
