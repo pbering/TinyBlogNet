@@ -86,10 +86,10 @@
     <Compile Include="Exceptions\InvalidHeaderException.cs" />
     <Compile Include="Exceptions\ParseException.cs" />
     <Compile Include="NullCache.cs" />
-    <Compile Include="RssActionResults.cs" />
+    <Compile Include="MVC\RssActionResults.cs" />
     <Compile Include="TextRepository.cs" />
     <Compile Include="MarkdownFile.cs" />
-    <Compile Include="SitemapActionResult.cs" />
+    <Compile Include="MVC\SitemapActionResult.cs" />
     <Compile Include="Text.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="PostRepository.cs" />

@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using System.Xml;
 
-namespace TinyBlogNet
+namespace TinyBlogNet.MVC
 {
     public class RssActionResult : ActionResult
     {

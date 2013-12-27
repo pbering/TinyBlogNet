@@ -3,6 +3,7 @@ using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Web.Mvc;
 using TinyBlogNet;
+using TinyBlogNet.MVC;
 
 namespace MyBlog.Website.Controllers
 {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Web.Mvc;
 using System.Xml.Linq;
 
-namespace TinyBlogNet
+namespace TinyBlogNet.MVC
 {
     public class SitemapActionResult : ActionResult
     {
