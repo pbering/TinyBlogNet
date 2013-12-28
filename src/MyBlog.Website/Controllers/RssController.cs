@@ -22,7 +22,7 @@ namespace MyBlog.Website.Controllers
             var serverUrl = ControllerContext.RequestContext.HttpContext.Request.GetServerUrl();
 
             var feed = new SyndicationFeed(
-                "perbering.com",
+                MvcApplication.AppName,
                 "Feed of all posts",
                 new Uri(serverUrl + "/rss.xml"),
                 "1",

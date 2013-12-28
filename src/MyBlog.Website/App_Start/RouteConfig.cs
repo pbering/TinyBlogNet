@@ -12,6 +12,13 @@ namespace MyBlog.Website.App_Start
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute("Robots", "robots.txt",
+                new
+                {
+                    controller = "Robots",
+                    action = "Index"
+                });
+
             routes.MapRoute("Sitemap", "sitemap.xml",
                 new
                 {

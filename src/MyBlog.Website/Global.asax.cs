@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -9,6 +10,18 @@ namespace MyBlog.Website
 {
     public class MvcApplication : HttpApplication
     {
+        private static readonly string _appName;
+
+        static MvcApplication()
+        {
+            _appName = ConfigurationManager.AppSettings["MyBlog:Name"] ?? string.Empty;
+        }
+
+        public static string AppName
+        {
+            get { return _appName; }
+        }
+
         protected void Application_Start()
         {
             MvcHandler.DisableMvcResponseHeader = true;

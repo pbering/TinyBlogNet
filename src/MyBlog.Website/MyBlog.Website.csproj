@@ -129,6 +129,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\RssController.cs" />
+    <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -143,7 +144,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Css\Site.css" />
-    <Content Include="robots.txt" />
     <Content Include="App_Data\Posts\this-is-a-test-one.md" />
     <Content Include="App_Data\Posts\fixing-the-sitecore-mediaprovider.md" />
     <Content Include="App_Data\about.md" />

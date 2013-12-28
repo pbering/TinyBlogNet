@@ -1,6 +1,0 @@
-﻿user-agent: *
-disallow: /scripts/
-disallow: /fonts/
-disallow: /content/
-disallow: /views/
-sitemap: http://perbering.azurewebsites.net/sitemap.xml

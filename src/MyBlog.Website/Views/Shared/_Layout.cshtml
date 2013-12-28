@@ -1,12 +1,12 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>@ViewBag.Title - perbering.com</title>
-        <link rel="alternate" type="application/rss+xml" title="perbering.com" href="//@Request.GetServerHost()/rss.xml">
-        @Styles.Render("~/content/site")
-        <script type="text/javascript">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - @MvcApplication.AppName</title>
+    <link rel="alternate" type="application/rss+xml" title="@MvcApplication.AppName" href="//@Request.GetServerHost()/rss.xml">
+    @Styles.Render("~/content/site")
+    <script type="text/javascript">
             <!--
             (function() {
                 if ("-ms-user-select" in document.documentElement.style && navigator.userAgent.match(/IEMobile\/10\.0/)) {
@@ -18,58 +18,58 @@
                 }
             })();
             //-->
-        </script>
-        @Scripts.Render("~/bundles/modernizr")
-    </head>
-    <body>
-        <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">Blog</a>
-                </div>
-                <div class="collapse navbar-collapse" id="navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("About", "Index", "Content", new { name = "About" }, null)</li>
+    </script>
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">@MvcApplication.AppName</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("About", "Index", "Content", new { name = "About" }, null)</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                @RenderBody()
+            </div>
+            <div class="col-lg-4">
+                @if (IsSectionDefined("Well"))
+                {
+                    @RenderSection("Well")
+                }
+                <div class="well">
+                    <h4>Follow me</h4>
+                    <ul class="list-unstyled">
+                        <li><i class="glyphicon glyphicon-link"></i> <a href="//@Request.GetServerHost()/rss.xml" target="_blank">Blog RSS</a></li>
+                        <li><i class="glyphicon glyphicon-link"></i> <a href="https://twitter.com/pbering" target="_blank">https://twitter.com/pbering</a></li>
+                        <li><i class="glyphicon glyphicon-link"></i> <a href="https://github.com/pbering" target="_blank">https://github.com/pbering</a></li>
+                    </ul>
+                    <h4>Other links of interest</h4>
+                    <ul class="list-unstyled">
+                        <li><i class="glyphicon glyphicon-link"></i> <a href="http://sitecoredeveloper.uservoice.com" target="_blank">http://sitecoredeveloper.uservoice.com</a></li>
                     </ul>
                 </div>
-            </div>
-        </nav>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    @RenderBody()
-                </div>
-                <div class="col-lg-4">
-                    @if (IsSectionDefined("Well"))
-                    {
-                        @RenderSection("Well")
-                    }
-                    <div class="well">
-                        <h4>Follow me</h4>
-                        <ul class="list-unstyled">
-                            <li><i class="glyphicon glyphicon-link"></i> <a href="//@Request.GetServerHost()/rss.xml" target="_blank">Blog RSS</a></li>
-                            <li><i class="glyphicon glyphicon-link"></i> <a href="https://twitter.com/pbering" target="_blank">https://twitter.com/pbering</a></li>
-                            <li><i class="glyphicon glyphicon-link"></i> <a href="https://github.com/pbering" target="_blank">https://github.com/pbering</a></li>
-                        </ul>
-                        <h4>Other links of interest</h4>
-                        <ul class="list-unstyled">
-                            <li><i class="glyphicon glyphicon-link"></i> <a href="http://sitecoredeveloper.uservoice.com" target="_blank">http://sitecoredeveloper.uservoice.com</a></li>
-                        </ul>
-                    </div>
-                    <div class="well">
-                        <h4>All tags</h4>
-                        @{ Html.RenderAction("All", "Tags"); }
-                    </div>
+                <div class="well">
+                    <h4>All tags</h4>
+                    @{ Html.RenderAction("All", "Tags"); }
                 </div>
             </div>
         </div>
-        @Scripts.Render("~/bundles/site")
-        @RenderSection("scripts", false)
-    </body>
+    </div>
+    @Scripts.Render("~/bundles/site")
+    @RenderSection("scripts", false)
+</body>
 </html>
