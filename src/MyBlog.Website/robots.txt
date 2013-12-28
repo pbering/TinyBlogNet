@@ -2,4 +2,5 @@
 disallow: /scripts/
 disallow: /fonts/
 disallow: /content/
-sitemap: http://sitecoreperfblog.azurewebsites.net/sitemap.xml
+disallow: /views/
+sitemap: http://perbering.azurewebsites.net/sitemap.xml
