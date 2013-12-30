@@ -53,6 +53,7 @@
     <Compile Include="PostRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HumaneDateStringTests.cs" />
+    <Compile Include="StringBuilderExtensions.cs" />
     <Compile Include="TextRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>

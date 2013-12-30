@@ -29,14 +29,14 @@ namespace TinyBlogNet.Tests
             //// Arrange
             var content = new StringBuilder();
 
-            content.AppendFormat("---{0}", Environment.NewLine);
-            content.AppendFormat("title: This is a test{0}", Environment.NewLine);
-            content.AppendFormat("summary: This is a summary{0}", Environment.NewLine);
-            content.AppendFormat("date: 2013-01-01{0}", Environment.NewLine);
-            content.AppendFormat("tags: Sitecore,Performance, testing{0}", Environment.NewLine);
-            content.AppendFormat("---{0}", Environment.NewLine);
-            content.AppendFormat("## TEST ##{0}", Environment.NewLine);
-            content.AppendFormat("This is a Test{0}", Environment.NewLine);
+            content.AppendNewLine("---");
+            content.AppendNewLine("title: This is a test");
+            content.AppendNewLine("summary: This is a summary");
+            content.AppendNewLine("date: 2013-01-01");
+            content.AppendNewLine("tags: Sitecore,Performance, testing");
+            content.AppendNewLine("---");
+            content.AppendNewLine("## TEST ##");
+            content.AppendNewLine("This is a Test");
 
             var file = Substitute.For<FileBase>();
 
@@ -62,14 +62,14 @@ namespace TinyBlogNet.Tests
             //// Arrange
             var content = new StringBuilder();
 
-            content.AppendFormat("---{0}", Environment.NewLine);
-            content.AppendFormat("title: This is a test{0}", Environment.NewLine);
-            content.AppendFormat("summary: This is a summary{0}", Environment.NewLine);
-            content.AppendFormat("date: 2013-01-01{0}", Environment.NewLine);
-            content.AppendFormat("tags: Test{0}", Environment.NewLine);
-            content.AppendFormat("---{0}", Environment.NewLine);
-            content.AppendFormat("## TEST ##{0}", Environment.NewLine);
-            content.AppendFormat("This is a Test{0}", Environment.NewLine);
+            content.AppendNewLine("---");
+            content.AppendNewLine("title: This is a test");
+            content.AppendNewLine("summary: This is a summary");
+            content.AppendNewLine("date: 2013-01-01");
+            content.AppendNewLine("tags: Test");
+            content.AppendNewLine("---");
+            content.AppendNewLine("## TEST ##");
+            content.AppendNewLine("This is a Test");
 
             var file = Substitute.For<FileBase>();
 
@@ -97,12 +97,12 @@ namespace TinyBlogNet.Tests
             //// Arrange
             var content = new StringBuilder();
 
-            content.AppendFormat("---{0}", Environment.NewLine);
-            content.AppendFormat("summary: This is a summary{0}", Environment.NewLine);
-            content.AppendFormat("date: 2013-01-01{0}", Environment.NewLine);
-            content.AppendFormat("---{0}", Environment.NewLine);
-            content.AppendFormat("## TEST ##{0}", Environment.NewLine);
-            content.AppendFormat("This is a Test{0}", Environment.NewLine);
+            content.AppendNewLine("---");
+            content.AppendNewLine("summary: This is a summary");
+            content.AppendNewLine("date: 2013-01-01");
+            content.AppendNewLine("---");
+            content.AppendNewLine("## TEST ##");
+            content.AppendNewLine("This is a Test");
 
             var file = Substitute.For<FileBase>();
 
@@ -121,13 +121,43 @@ namespace TinyBlogNet.Tests
         }
 
         [Fact]
+        public void parse_throws_exception_on_invalid_date()
+        {
+            //// Arrange
+            var content = new StringBuilder();
+
+            content.AppendNewLine("---");
+            content.AppendNewLine("title: Title");
+            content.AppendNewLine("summary: This is a summary");
+            content.AppendNewLine("date: 2013-13-01");
+            content.AppendNewLine("---");
+            content.AppendNewLine("## TEST ##");
+            content.AppendNewLine("This is a Test");
+
+            var file = Substitute.For<FileBase>();
+
+            file.Name.Returns("this-is-a-test");
+            file.Extension.Returns("md");
+            file.OpenRead().Returns(new MemoryStream(Encoding.UTF8.GetBytes(content.ToString())));
+
+            var post = new Post(new MarkdownFile(file));
+
+            //// Act
+            Action parse = post.Parse;
+
+            //// Assert
+            parse.ShouldThrow<InvalidHeaderValueException>()
+                .WithMessage("The header 'date' with value '2013-13-01' could not be parsed as DateTime");
+        }
+
+        [Fact]
         public void parse_throws_exception_when_no_header_present()
         {
             //// Arrange
             var content = new StringBuilder();
 
-            content.AppendFormat("## TEST ##{0}", Environment.NewLine);
-            content.AppendFormat("This is a Test{0}", Environment.NewLine);
+            content.AppendNewLine("## TEST ##");
+            content.AppendNewLine("This is a Test");
 
             var file = Substitute.For<FileBase>();
 
