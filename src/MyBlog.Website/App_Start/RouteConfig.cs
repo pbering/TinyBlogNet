@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace MyBlog.Website
+namespace MyBlog.Website.App_Start
 {
     public class RouteConfig
     {
@@ -9,7 +9,6 @@ namespace MyBlog.Website
         {
             routes.LowercaseUrls = true;
             routes.AppendTrailingSlash = true;
-
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute("Robots", "robots.txt",

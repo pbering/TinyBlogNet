@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace MyBlog.Website
+namespace MyBlog.Website.App_Start
 {
     public class BundleConfig
     {

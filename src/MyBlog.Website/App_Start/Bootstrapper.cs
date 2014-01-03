@@ -10,7 +10,7 @@ using System.Web.Routing;
 using TinyBlogNet;
 using TinyBlogNet.IO;
 
-namespace MyBlog.Website
+namespace MyBlog.Website.App_Start
 {
     public static class Bootstrapper
     {
