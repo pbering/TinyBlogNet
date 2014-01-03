@@ -44,6 +44,11 @@ namespace MyBlog.Website.App_Start
 
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
+            if (controllerType == null)
+            {
+                return base.GetControllerInstance(requestContext, null);
+            }
+
             var parameters = new List<object>();
             var constructor = controllerType.GetConstructors().FirstOrDefault(info => info.GetParameters().Length > 0);
 
