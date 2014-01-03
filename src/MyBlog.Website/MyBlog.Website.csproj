@@ -40,15 +40,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LightInject">
-      <HintPath>..\..\packages\LightInject.3.0.1.0\lib\net45\LightInject.dll</HintPath>
-    </Reference>
-    <Reference Include="LightInject.Mvc">
-      <HintPath>..\..\packages\LightInject.Mvc.1.0.0.2\lib\net45\LightInject.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="LightInject.Web">
-      <HintPath>..\..\packages\LightInject.Web.1.0.0.2\lib\net45\LightInject.Web.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
