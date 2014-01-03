@@ -4,6 +4,7 @@ namespace MyBlog.Website.Controllers
 {
     public class ErrorController : Controller
     {
+        [OutputCache(CacheProfile = "DefaultLight")]
         public ActionResult NotFound()
         {
             HttpContext.Response.StatusCode = 404;

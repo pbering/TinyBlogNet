@@ -28,7 +28,7 @@ namespace MyBlog.Website.Controllers
         }
 
         [ChildActionOnly]
-        [OutputCache(Duration = 60, VaryByParam = "none")]
+        [OutputCache(Duration = 120, VaryByParam = "none")]
         public ActionResult All()
         {
             var model = new List<Tag>();
