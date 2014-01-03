@@ -1,10 +1,6 @@
 ﻿using System;
-using System.IO;
-using System.Text;
 using FluentAssertions;
-using NSubstitute;
 using TinyBlogNet.Exceptions;
-using TinyBlogNet.IO;
 using Xunit;
 
 namespace TinyBlogNet.Tests
@@ -27,24 +23,11 @@ namespace TinyBlogNet.Tests
         public void parse_valid_file_with_tags()
         {
             //// Arrange
-            var content = new StringBuilder();
+            var file = TestFileBuilder.Dummy()
+                .Tags("Sitecore,Performance, testing")
+                .AsMarkdownFile();
 
-            content.AppendNewLine("---");
-            content.AppendNewLine("title: This is a test");
-            content.AppendNewLine("summary: This is a summary");
-            content.AppendNewLine("date: 2013-01-01");
-            content.AppendNewLine("tags: Sitecore,Performance, testing");
-            content.AppendNewLine("---");
-            content.AppendNewLine("## TEST ##");
-            content.AppendNewLine("This is a Test");
-
-            var file = Substitute.For<FileBase>();
-
-            file.Name.Returns("this-is-a-test");
-            file.Extension.Returns("md");
-            file.OpenRead().Returns(new MemoryStream(Encoding.UTF8.GetBytes(content.ToString())));
-
-            var post = new Post(new MarkdownFile(file));
+            var post = new Post(file);
 
             //// Act
             post.Parse();
@@ -60,31 +43,24 @@ namespace TinyBlogNet.Tests
         public void parse_valid_file()
         {
             //// Arrange
-            var content = new StringBuilder();
+            var file = TestFileBuilder.New()
+                .StartHeader()
+                .Title("This is a test")
+                .Summary("This is a summary")
+                .Date("2013-01-01")
+                .EndHeader()
+                .AddLine("## TEST ##")
+                .AddLine("This is a Test")
+                .AsMarkdownFile("this-is-another-test");
 
-            content.AppendNewLine("---");
-            content.AppendNewLine("title: This is a test");
-            content.AppendNewLine("summary: This is a summary");
-            content.AppendNewLine("date: 2013-01-01");
-            content.AppendNewLine("tags: Test");
-            content.AppendNewLine("---");
-            content.AppendNewLine("## TEST ##");
-            content.AppendNewLine("This is a Test");
-
-            var file = Substitute.For<FileBase>();
-
-            file.Name.Returns("this-is-a-test");
-            file.Extension.Returns("md");
-            file.OpenRead().Returns(new MemoryStream(Encoding.UTF8.GetBytes(content.ToString())));
-
-            var post = new Post(new MarkdownFile(file));
+            var post = new Post(file);
 
             //// Act
             post.Parse();
 
             //// Assert
-            post.Name.Should().Be("this-is-a-test");
-            post.Url.Should().Be(new Uri("/posts/this-is-a-test/", UriKind.Relative));
+            post.Name.Should().Be("this-is-another-test");
+            post.Url.Should().Be(new Uri("/posts/this-is-another-test/", UriKind.Relative));
             post.Content.Should().Be("<h2>TEST</h2>\n\n<p>This is a Test</p>\n");
             post.Title.Should().Be("This is a test");
             post.Summary.Should().Be("This is a summary");
@@ -95,22 +71,11 @@ namespace TinyBlogNet.Tests
         public void parse_throws_exception_on_missing_title_header()
         {
             //// Arrange
-            var content = new StringBuilder();
+            var file = TestFileBuilder.Dummy()
+                .Title(null)
+                .AsMarkdownFile();
 
-            content.AppendNewLine("---");
-            content.AppendNewLine("summary: This is a summary");
-            content.AppendNewLine("date: 2013-01-01");
-            content.AppendNewLine("---");
-            content.AppendNewLine("## TEST ##");
-            content.AppendNewLine("This is a Test");
-
-            var file = Substitute.For<FileBase>();
-
-            file.Name.Returns("this-is-a-test");
-            file.Extension.Returns("md");
-            file.OpenRead().Returns(new MemoryStream(Encoding.UTF8.GetBytes(content.ToString())));
-
-            var post = new Post(new MarkdownFile(file));
+            var post = new Post(file);
 
             //// Act
             Action parse = post.Parse;
@@ -124,23 +89,11 @@ namespace TinyBlogNet.Tests
         public void parse_throws_exception_on_invalid_date()
         {
             //// Arrange
-            var content = new StringBuilder();
+            var file = TestFileBuilder.Dummy()
+                .Date("2013-13-01")
+                .AsMarkdownFile();
 
-            content.AppendNewLine("---");
-            content.AppendNewLine("title: Title");
-            content.AppendNewLine("summary: This is a summary");
-            content.AppendNewLine("date: 2013-13-01");
-            content.AppendNewLine("---");
-            content.AppendNewLine("## TEST ##");
-            content.AppendNewLine("This is a Test");
-
-            var file = Substitute.For<FileBase>();
-
-            file.Name.Returns("this-is-a-test");
-            file.Extension.Returns("md");
-            file.OpenRead().Returns(new MemoryStream(Encoding.UTF8.GetBytes(content.ToString())));
-
-            var post = new Post(new MarkdownFile(file));
+            var post = new Post(file);
 
             //// Act
             Action parse = post.Parse;
@@ -154,18 +107,11 @@ namespace TinyBlogNet.Tests
         public void parse_throws_exception_when_no_header_present()
         {
             //// Arrange
-            var content = new StringBuilder();
+            var file = TestFileBuilder.New()
+                .AddLine("## TEST ##")
+                .AsMarkdownFile();
 
-            content.AppendNewLine("## TEST ##");
-            content.AppendNewLine("This is a Test");
-
-            var file = Substitute.For<FileBase>();
-
-            file.Name.Returns("this-is-a-test");
-            file.Extension.Returns("md");
-            file.OpenRead().Returns(new MemoryStream(Encoding.UTF8.GetBytes(content.ToString())));
-
-            var post = new Post(new MarkdownFile(file));
+            var post = new Post(file);
 
             //// Act
             Action parse = post.Parse;
