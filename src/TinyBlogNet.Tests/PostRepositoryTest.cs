@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Text;
+﻿using System.Linq;
 using FluentAssertions;
 using NSubstitute;
 using TinyBlogNet.IO;
@@ -40,10 +38,16 @@ namespace TinyBlogNet.Tests
             var repository = new PostRepository(filesystem);
 
             //// Act
-            var posts = repository.FindByTag("sitecore");
+            var posts = repository.FindByTag("sitecore").ToList();
 
             //// Assert
             posts.Should().HaveCount(2);
+
+            foreach (var post in posts)
+            {
+                post.Tags.Count.Should().Be(2);
+                post.Tags.Should().Contain(new Tag("Sitecore"));
+            }
         }
 
         [Fact]
@@ -67,29 +71,7 @@ namespace TinyBlogNet.Tests
 
         private FileBase GetFileMock(string tags = "")
         {
-            var content = new StringBuilder();
-
-            content.AppendFormat("---{0}", Environment.NewLine);
-            content.AppendFormat("title: This is a test{0}", Environment.NewLine);
-            content.AppendFormat("summary: This is a summary{0}", Environment.NewLine);
-            content.AppendFormat("date: 2013-01-01{0}", Environment.NewLine);
-
-            if (!string.IsNullOrEmpty(tags))
-            {
-                content.AppendFormat("tags: {0}{1}", tags, Environment.NewLine);
-            }
-
-            content.AppendFormat("---{0}", Environment.NewLine);
-            content.AppendFormat("## TEST ##{0}", Environment.NewLine);
-            content.AppendFormat("This is a Test{0}", Environment.NewLine);
-
-            var file = Substitute.For<FileBase>();
-
-            file.Name.Returns("this-is-a-test");
-            file.Extension.Returns("md");
-            file.OpenRead().Returns(new MemoryStream(Encoding.UTF8.GetBytes(content.ToString())));
-
-            return file;
+            return TestFileBuilder.Dummy().Tags(tags).AsFile();
         }
     }
 }

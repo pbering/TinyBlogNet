@@ -18,6 +18,7 @@ namespace TinyBlogNet.Tests
             //// Assert
             tag1.Should().Be(tag2);
             tag1.GetHashCode().ShouldBeEquivalentTo(tag2.GetHashCode());
+            tag1.ToString().Should().Be(tag1.Name);
         }
 
         [Fact]

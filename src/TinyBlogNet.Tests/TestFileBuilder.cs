@@ -90,6 +90,11 @@ namespace TinyBlogNet.Tests
 
         public MarkdownFile AsMarkdownFile(string name = "this-is-a-test", string extension = "md")
         {
+            return new MarkdownFile(AsFile(name, extension));
+        }
+
+        public FileBase AsFile(string name = "this-is-a-test", string extension = "md")
+        {
             var content = new StringBuilder();
 
             if (!string.IsNullOrEmpty(_startHeader))
@@ -133,7 +138,7 @@ namespace TinyBlogNet.Tests
                 Extension = extension
             };
 
-            return new MarkdownFile(file);
+            return file;
         }
 
         internal class TestFile : FileBase
