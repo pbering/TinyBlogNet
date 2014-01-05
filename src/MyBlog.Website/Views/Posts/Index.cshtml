@@ -4,3 +4,6 @@
 }
 @{ Html.RenderPartial("~/Views/Shared/_Post.cshtml", Model); }
 @Html.Raw(Model.Content)
+@section Head {
+    <meta name="description" content="@Model.Summary">
+}
