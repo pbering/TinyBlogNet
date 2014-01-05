@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using System.Xml.Linq;
+using TinyBlogNet;
 
-namespace TinyBlogNet.MVC
+namespace MyBlog.Website.Controllers
 {
     public class SitemapActionResult : ActionResult
     {

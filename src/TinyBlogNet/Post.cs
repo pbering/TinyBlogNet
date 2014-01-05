@@ -53,7 +53,9 @@ namespace TinyBlogNet
 
                 if (tagsString.IndexOf(",", StringComparison.Ordinal) > -1)
                 {
-                    tags = tagsString.Split(',').Select(tagName => new Tag(tagName.Trim())).ToList();
+                    tags = tagsString.Split(',')
+                        .Where(tagName => !string.IsNullOrEmpty(tagName.Trim()))
+                        .Select(tagName => new Tag(tagName.Trim())).ToList();
                 }
                 else
                 {

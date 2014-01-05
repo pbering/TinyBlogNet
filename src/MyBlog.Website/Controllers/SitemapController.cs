@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using TinyBlogNet;
-using TinyBlogNet.MVC;
 
 namespace MyBlog.Website.Controllers
 {

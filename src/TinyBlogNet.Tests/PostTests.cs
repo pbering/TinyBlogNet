@@ -17,6 +17,18 @@ namespace TinyBlogNet.Tests
             //// Act
             //// Assert
             tag1.Should().Be(tag2);
+            tag1.GetHashCode().ShouldBeEquivalentTo(tag2.GetHashCode());
+        }
+
+        [Fact]
+        public void tag_without_name_throws_exception()
+        {
+            //// Arrange
+            //// Act
+            Action act = () => new Tag("");
+
+            //// Assert
+            act.ShouldThrow<ArgumentException>();
         }
 
         [Fact]
@@ -37,6 +49,42 @@ namespace TinyBlogNet.Tests
             post.Tags.Should().Contain(new Tag("Performance"));
             post.Tags.Should().Contain(new Tag("Testing"));
             post.Tags.Should().NotContain(new Tag("Code"));
+        }
+
+        [Fact]
+        public void parse_valid_file_with_single_tag()
+        {
+            //// Arrange
+            var file = TestFileBuilder.Dummy()
+                .Tags("Sitecore")
+                .AsMarkdownFile();
+
+            var post = new Post(file);
+
+            //// Act
+            post.Parse();
+
+            //// Assert
+            post.Tags.Count.Should().Be(1);
+            post.Tags.Should().Contain(new Tag("Sitecore"));
+        }
+
+        [Fact]
+        public void parse_valid_file_with_single_tag_and_too_many_commas()
+        {
+            //// Arrange
+            var file = TestFileBuilder.Dummy()
+                .Tags("Sitecore, ")
+                .AsMarkdownFile();
+
+            var post = new Post(file);
+
+            //// Act
+            post.Parse();
+
+            //// Assert
+            post.Tags.Count.Should().Be(1);
+            post.Tags.Should().Contain(new Tag("Sitecore"));
         }
 
         [Fact]
@@ -83,6 +131,41 @@ namespace TinyBlogNet.Tests
             //// Assert
             parse.ShouldThrow<HeaderNotFoundException>()
                 .WithMessage("'title' was not found");
+        }
+
+        [Fact]
+        public void parse_throws_exception_on_malformed_header()
+        {
+            //// Arrange
+            var file = TestFileBuilder.New()
+                .StartHeader()
+                .Title(":")
+                .EndHeader()
+                .AsMarkdownFile();
+
+            //// Act
+            Action parse = file.Parse;
+
+            //// Assert
+            parse.ShouldThrow<InvalidHeaderException>()
+                .WithMessage("More than one : found");
+        }
+
+        [Fact]
+        public void parse_throws_exception_on_empty_header()
+        {
+            //// Arrange
+            var file = TestFileBuilder.New()
+                .StartHeader()
+                .EndHeader()
+                .AsMarkdownFile();
+
+            //// Act
+            Action parse = file.Parse;
+
+            //// Assert
+            parse.ShouldThrow<InvalidHeaderException>()
+                .WithMessage("No headers was found");
         }
 
         [Fact]

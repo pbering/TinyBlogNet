@@ -102,6 +102,7 @@
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -117,8 +118,10 @@
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="Controllers\RssActionResults.cs" />
     <Compile Include="Controllers\RssController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
+    <Compile Include="Controllers\SitemapActionResult.cs" />
     <Compile Include="Controllers\SitemapController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Global.asax.cs">
