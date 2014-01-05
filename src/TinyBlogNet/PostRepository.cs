@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using TinyBlogNet.IO;
@@ -26,32 +25,22 @@ namespace TinyBlogNet
 
         public IEnumerator<Post> GetEnumerator()
         {
-            var watch = Stopwatch.StartNew();
             var posts = new ConcurrentBag<Post>();
 
             Parallel.ForEach(_filesystem.GetFiles("*.md"), file =>
             {
                 Post post;
 
-                if (_cache.TryGet(file.FullName, out post))
-                {
-                    Debug.WriteLine("Post '{0}' loaded from cache", new object[] {post.Title});
-                }
-                else
+                if (!_cache.TryGet(file.FullName, out post))
                 {
                     post = new Post(new MarkdownFile(file));
-
                     post.Parse();
 
                     _cache.Add(post, file.FullName, file);
-
-                    Debug.WriteLine("Post '{0}' loaded from disk", new object[] {post.Title});
                 }
 
                 posts.Add(post);
             });
-
-            Debug.WriteLine("Posts loaded and parsed in {0} ms", watch.Elapsed.TotalMilliseconds);
 
             return posts.GetEnumerator();
         }

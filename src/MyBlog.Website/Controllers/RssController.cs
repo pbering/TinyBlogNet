@@ -20,13 +20,8 @@ namespace MyBlog.Website.Controllers
         public RssActionResult Index()
         {
             var serverUrl = ControllerContext.RequestContext.HttpContext.Request.GetServerUrl();
-
-            var feed = new SyndicationFeed(
-                MvcApplication.AppName,
-                "Feed of all posts",
-                new Uri(serverUrl + "/rss.xml"),
-                "1",
-                DateTime.Now)
+            var feed = new SyndicationFeed(MvcApplication.AppName, "Feed of all posts",
+                new Uri(serverUrl + "/rss.xml"), "1", DateTime.Now)
             {
                 Items = _postRepository.Select(
                     post => new SyndicationItem(
