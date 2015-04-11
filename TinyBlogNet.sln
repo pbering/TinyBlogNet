@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 14
+VisualStudioVersion = 14.0.22609.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Website", "src\MyBlog.Website\MyBlog.Website.csproj", "{45F1D84E-453E-4671-B40B-B558C37578CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyBlogNet", "src\TinyBlogNet\TinyBlogNet.csproj", "{1544C484-EAE1-4C6D-9A9C-8F906354C18A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyBlogNet.Tests", "src\TinyBlogNet.Tests\TinyBlogNet.Tests.csproj", "{7BF1BB8E-4B74-4167-88F9-2C8120DDCA24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog", "src\Blog\Blog.csproj", "{7D8ABE7C-465C-491F-A61C-0508C6ECA9AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{7BF1BB8E-4B74-4167-88F9-2C8120DDCA24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BF1BB8E-4B74-4167-88F9-2C8120DDCA24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BF1BB8E-4B74-4167-88F9-2C8120DDCA24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D8ABE7C-465C-491F-A61C-0508C6ECA9AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D8ABE7C-465C-491F-A61C-0508C6ECA9AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D8ABE7C-465C-491F-A61C-0508C6ECA9AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D8ABE7C-465C-491F-A61C-0508C6ECA9AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
