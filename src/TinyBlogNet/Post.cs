@@ -42,7 +42,7 @@ namespace TinyBlogNet
             }
             else
             {
-                throw new InvalidHeaderValueException(string.Format("The header 'date' with value '{0}' could not be parsed as DateTime", dateString));
+                throw new InvalidHeaderValueException($"The header 'date' with value '{dateString}' could not be parsed as DateTime");
             }
 
             var tagsString = _file.GetHeaderValue("tags", true);
