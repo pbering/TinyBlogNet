@@ -21,7 +21,7 @@ namespace Blog
     {
         public void Configuration(IAppBuilder app)
         {
-            const string title = "dev and ops";
+            const string title = "blog.perbering.com";
             var posts = new PostRepository(new FileSystem(HostingEnvironment.MapPath("~/Posts")), new Cache());
 
             app.RunPipeline(new Pipeline()
@@ -91,7 +91,7 @@ namespace Blog
                       "<body>" +
                       "<nav><a href=\"/\">" + title + "</a>&nbsp;|&nbsp;<a href=\"/rss.xml\">rss</a></nav>" +
                       "{1}" +
-                      "<footer><p>reach out: <a href=\"https://twitter.com/pbering\">https://twitter.com/pbering</a></p></footer>" +
+                      "<footer><p>reach out: <a href=\"https://twitter.com/pbering\">twitter.com/pbering</a>, <a href=\"https://github.com/pbering\">github.com/pbering</a></p></footer>" +
                       "</body>" +
                       "</html>";
         }

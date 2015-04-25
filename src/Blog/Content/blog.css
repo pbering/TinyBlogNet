@@ -5,9 +5,9 @@ body {
     color: #d4d4c9;
     font-family: "Courier New", Courier, monospace;
     font-size: 1.2em;
-    padding-top: 1em;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 1em;
     width: 80%;
 }
 
@@ -15,12 +15,12 @@ h2 { font-size: 2em; }
 
 nav {
     border-bottom: #d4d4c9 dashed 2px;
+    font-weight: bold;
     margin-bottom: 10px;
     padding-bottom: 20px;
-    font-weight: bold;
 }
 
-a { color: #c5c5aa; }
+a { color: #d4d4c9; }
 
 a:hover { color: white; }
 
