@@ -58,7 +58,6 @@
     <Compile Include="Cache.cs" />
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="Exceptions\InvalidHeaderValueException.cs" />
-    <Compile Include="HttpRequestExtensions.cs" />
     <Compile Include="IO\File.cs" />
     <Compile Include="IO\FileBase.cs" />
     <Compile Include="IO\FileSystem.cs" />

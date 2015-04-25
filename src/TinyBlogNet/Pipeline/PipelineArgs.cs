@@ -10,7 +10,7 @@ namespace TinyBlogNet.Pipeline
         }
 
         public string Layout { get; set; }
-        public IOwinContext Context { get; }
+        public IOwinContext Context { get; private set; }
         public bool IsAborted { get; private set; }
 
         public void Abort()

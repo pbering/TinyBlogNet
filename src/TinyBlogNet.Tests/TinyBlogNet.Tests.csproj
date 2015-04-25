@@ -92,10 +92,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyBlog.Website\MyBlog.Website.csproj">
-      <Project>{45f1d84e-453e-4671-b40b-b558c37578ca}</Project>
-      <Name>PicoBlog.Web</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TinyBlogNet\TinyBlogNet.csproj">
       <Project>{1544c484-eae1-4c6d-9a9c-8f906354c18a}</Project>
       <Name>PicoBlog</Name>

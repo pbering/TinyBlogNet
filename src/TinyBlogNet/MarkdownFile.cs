@@ -18,8 +18,8 @@ namespace TinyBlogNet
         public MarkdownFile(FileBase file)
         {
             _file = file;
-           _headers = new Dictionary<string, string>();
-           
+            _headers = new Dictionary<string, string>();
+
             Name = _file.Name.Replace(file.Extension, "");
             Modified = _file.Modified;
         }
@@ -100,7 +100,7 @@ namespace TinyBlogNet
             {
                 if (!optional)
                 {
-                    throw new HeaderNotFoundException($"'{key}' was not found in '{_file.FullName}'");
+                    throw new HeaderNotFoundException(string.Format("'{0}' was not found in '{1}'", key, _file.FullName));
                 }
             }
 

@@ -15,7 +15,7 @@ namespace TinyBlogNet
             _file = file;
 
             Name = _file.Name;
-            Url = new Uri($"/posts/{_file.Name.ToLowerInvariant()}", UriKind.Relative);
+            Url = new Uri("/posts/" + _file.Name.ToLowerInvariant(), UriKind.Relative);
             Tags = new ReadOnlyCollection<Tag>(Enumerable.Empty<Tag>().ToList());
         }
 
@@ -42,7 +42,7 @@ namespace TinyBlogNet
             }
             else
             {
-                throw new InvalidHeaderValueException($"The header 'date' with value '{dateString}' could not be parsed as DateTime");
+                throw new InvalidHeaderValueException(string.Format("The header 'date' with value '{0}' could not be parsed as DateTime", dateString));
             }
 
             var tagsString = _file.GetHeaderValue("tags", true);

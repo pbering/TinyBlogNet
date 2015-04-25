@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22609.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Website", "src\MyBlog.Website\MyBlog.Website.csproj", "{45F1D84E-453E-4671-B40B-B558C37578CA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyBlogNet", "src\TinyBlogNet\TinyBlogNet.csproj", "{1544C484-EAE1-4C6D-9A9C-8F906354C18A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyBlogNet.Tests", "src\TinyBlogNet.Tests\TinyBlogNet.Tests.csproj", "{7BF1BB8E-4B74-4167-88F9-2C8120DDCA24}"
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{45F1D84E-453E-4671-B40B-B558C37578CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{45F1D84E-453E-4671-B40B-B558C37578CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{45F1D84E-453E-4671-B40B-B558C37578CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{45F1D84E-453E-4671-B40B-B558C37578CA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1544C484-EAE1-4C6D-9A9C-8F906354C18A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1544C484-EAE1-4C6D-9A9C-8F906354C18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1544C484-EAE1-4C6D-9A9C-8F906354C18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
