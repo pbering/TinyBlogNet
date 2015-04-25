@@ -21,22 +21,26 @@ namespace Blog
     {
         public void Configuration(IAppBuilder app)
         {
-            var title = "dev and ops";
+            const string title = "dev and ops";
             var posts = new PostRepository(new FileSystem(HostingEnvironment.MapPath("~/Posts")), new Cache());
 
-            app.Run(async ctx =>
-            {
-                await new Pipeline()
-                    .Add(new RemoveServerHeaderProcessor())
-                    .Add(new RobotsProcessor())
-                    .Add(new RssProcessor(posts, title))
-                    .Add(new SitemapProcessor(posts))
-                    .Add(new SetLayoutProcessor(title))
-                    .Add(new HomeProcessor(posts))
-                    .Add(new PostProcessor(posts))
-                    .Add(new NotFoundProcessor())
-                    .Run(ctx);
-            });
+            app.RunPipeline(new Pipeline()
+                .Add(new RemoveServerHeaderProcessor())
+                .Add(new RobotsProcessor())
+                .Add(new RssProcessor(posts, title))
+                .Add(new SitemapProcessor(posts))
+                .Add(new SetLayoutProcessor(title))
+                .Add(new HomeProcessor(posts))
+                .Add(new PostProcessor(posts))
+                .Add(new NotFoundProcessor()));
+        }
+    }
+
+    internal static class AppBuilderExtensions
+    {
+        public static void RunPipeline(this IAppBuilder app, Pipeline pipeline)
+        {
+            app.Run(async ctx => { await pipeline.Run(ctx); });
         }
     }
 
@@ -113,8 +117,7 @@ namespace Blog
 
             if (path.StartsWithSegments(new PathString("/posts")) && !path.Equals(new PathString("/posts")))
             {
-                var postName = path.Value.ToLowerInvariant().Replace("/posts/", "").Trim('/');
-                var post = _posts.FindByName(postName);
+                var post = _posts.FindByName(path.Value.ToLowerInvariant().Replace("/posts/", "").Trim('/'));
 
                 if (post != null)
                 {
@@ -197,13 +200,15 @@ namespace Blog
 
     internal class RssProcessor : Processor
     {
-        private readonly string _feedTitle;
+        private readonly string _description;
         private readonly PostRepository _posts;
+        private readonly string _title;
 
-        public RssProcessor(PostRepository posts, string feedTitle)
+        public RssProcessor(PostRepository posts, string title, string description = "All blog posts")
         {
             _posts = posts;
-            _feedTitle = feedTitle;
+            _title = title;
+            _description = description;
         }
 
         public override void Process(PipelineArgs args)
@@ -217,7 +222,7 @@ namespace Blog
                 args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(7).TotalSeconds;
 
                 var serverUrl = args.Context.Request.Scheme + "://" + args.Context.Request.Host.Value;
-                var feed = new SyndicationFeed(_feedTitle, "Feed of all posts", new Uri(serverUrl + "/rss.xml"), "1", DateTime.Now)
+                var feed = new SyndicationFeed(_title, _description, new Uri(serverUrl + "/rss.xml"), "1", DateTime.Now)
                 {
                     Items = _posts.Select(
                         post => new SyndicationItem(
