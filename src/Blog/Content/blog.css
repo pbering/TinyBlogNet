@@ -1,0 +1,30 @@
+﻿html { overflow-y: scroll; }
+
+body {
+    background-color: #1e1e1e;
+    color: #d4d4c9;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1.2em;
+    padding-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+h2 { font-size: 2em; }
+
+nav {
+    border-bottom: #d4d4c9 dashed 2px;
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    font-weight: bold;
+}
+
+a { color: #c5c5aa; }
+
+a:hover { color: white; }
+
+footer {
+    border-top: #d4d4c9 dashed 2px;
+    margin-top: 25px;
+}
