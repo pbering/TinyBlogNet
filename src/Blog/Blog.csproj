@@ -55,6 +55,7 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -73,11 +74,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\blog.css" />
     <Content Include="packages.config" />
-    <Content Include="files\fixing-the-sitecore-mediaprovider.md" />
-    <Content Include="files\this-is-a-test-one.md" />
-    <Content Include="files\this-is-a-test-three.md" />
-    <Content Include="files\this-is-a-test-two.md" />
+    <Content Include="Posts\fixing-the-sitecore-mediaprovider.md" />
+    <Content Include="Posts\this-is-a-test-one.md" />
+    <Content Include="Posts\this-is-a-test-three.md" />
+    <Content Include="Posts\this-is-a-test-two.md" />
+    <Content Include="Content\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -100,6 +105,7 @@
       <Name>TinyBlogNet</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -12,7 +12,7 @@ namespace TinyBlogNet
 
             Modified = _file.Modified;
             Name = _file.Name;
-            Url = new Uri(string.Format("/content/{0}/", _file.Name.ToLowerInvariant()), UriKind.Relative);
+            Url = new Uri($"/content/{_file.Name.ToLowerInvariant()}", UriKind.Relative);
         }
 
         public Uri Url { get; private set; }

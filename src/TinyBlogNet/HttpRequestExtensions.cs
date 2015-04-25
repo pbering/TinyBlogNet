@@ -13,8 +13,8 @@ namespace TinyBlogNet
             }
 
             var host = GetServerHost(request);
-            var scheme = request.Url != null ? request.Url.Scheme : "http";
-            var serverUrl = string.Format("{0}://{1}", scheme, host);
+            var scheme = request.Url?.Scheme ?? "http";
+            var serverUrl = $"{scheme}://{host}";
 
             return serverUrl;
         }
