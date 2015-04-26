@@ -12,6 +12,7 @@ using Owin;
 using TinyBlogNet;
 using TinyBlogNet.IO;
 using TinyBlogNet.Pipeline;
+using File = System.IO.File;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -85,7 +86,7 @@ namespace Blog
                       "<head>" +
                       "<meta charset=\"utf-8\">" +
                       "<meta name=\"viewport\" content=\"width=device-width,initial-scale= 1\">" +
-                      "<title>{0} - Blog</title>" +
+                      "<title>{0} - " + title + "</title>" +
                       "<link href=\"/content/blog.css\" rel=\"stylesheet\" type=\"text/css\" media=\"all\" />" +
                       "</head>" +
                       "<body>" +
