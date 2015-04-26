@@ -1,6 +1,4 @@
-﻿using TinyBlogNet.IO;
-
-namespace TinyBlogNet
+﻿namespace TinyBlogNet.IO
 {
     public class NullCache : Cache
     {

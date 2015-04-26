@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using MarkdownSharp;
 using TinyBlogNet.Exceptions;
-using TinyBlogNet.IO;
 
-namespace TinyBlogNet
+namespace TinyBlogNet.IO
 {
     public class MarkdownFile
     {

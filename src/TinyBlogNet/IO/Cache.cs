@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Caching;
-using TinyBlogNet.IO;
 
-namespace TinyBlogNet
+namespace TinyBlogNet.IO
 {
     public class Cache
     {

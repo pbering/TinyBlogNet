@@ -89,7 +89,7 @@ namespace Blog
                       "<link href=\"/content/blog.css\" rel=\"stylesheet\" type=\"text/css\" media=\"all\" />" +
                       "</head>" +
                       "<body>" +
-                      "<nav><a href=\"/\">" + title + "</a>&nbsp;|&nbsp;<a href=\"/rss.xml\">rss</a></nav>" +
+                      "<nav><a href=\"/\">" + title + "</a> | <a href=\"/rss.xml\">rss</a></nav>" +
                       "{1}" +
                       "<footer><p>reach out: <a href=\"https://twitter.com/pbering\">twitter.com/pbering</a>, <a href=\"https://github.com/pbering\">github.com/pbering</a></p></footer>" +
                       "</body>" +
