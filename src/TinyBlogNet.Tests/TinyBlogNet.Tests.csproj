@@ -73,7 +73,6 @@
     <Compile Include="HumaneDateStringTests.cs" />
     <Compile Include="StringBuilderExtensions.cs" />
     <Compile Include="TestFileBuilder.cs" />
-    <Compile Include="TextRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

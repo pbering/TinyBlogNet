@@ -1,14 +1,16 @@
-﻿html { overflow-y: scroll; }
+﻿html {
+    background-color: #1e1e1e;
+    overflow-y: scroll;
+}
 
 body {
-    background-color: #1e1e1e;
     color: #d4d4c9;
     font-family: "Courier New", Courier, monospace;
     font-size: 1.2em;
     margin-left: auto;
     margin-right: auto;
     padding-top: 1em;
-    width: 80%;
+    width: 90%;
 }
 
 h2 { font-size: 1.5em; }
@@ -26,4 +28,11 @@ a:hover { color: white; }
 footer {
     border-top: #d4d4c9 dashed 2px;
     margin-top: 25px;
+}
+
+article code {
+    background-color: #4f4f4f;
+    display: block;
+    overflow: auto;
+    padding: 10px;
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Text;
@@ -12,7 +13,6 @@ using Owin;
 using TinyBlogNet;
 using TinyBlogNet.IO;
 using TinyBlogNet.Pipeline;
-using File = System.IO.File;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -22,7 +22,7 @@ namespace Blog
     {
         public void Configuration(IAppBuilder app)
         {
-            const string title = "blog.perbering.com";
+            const string title = "devandops";
             var posts = new PostRepository(new FileSystem(HostingEnvironment.MapPath("~/Posts")), new Cache());
 
             app.RunPipeline(new Pipeline()
@@ -30,18 +30,11 @@ namespace Blog
                 .Add(new RobotsProcessor())
                 .Add(new RssProcessor(posts, title))
                 .Add(new SitemapProcessor(posts))
-                .Add(new SetLayoutProcessor(title))
+                .Add(new LayoutProcessor(title))
                 .Add(new HomeProcessor(posts))
                 .Add(new PostProcessor(posts))
+                .Add(new TagProcessor(posts))
                 .Add(new NotFoundProcessor()));
-        }
-    }
-
-    internal static class AppBuilderExtensions
-    {
-        public static void RunPipeline(this IAppBuilder app, Pipeline pipeline)
-        {
-            app.Run(async ctx => { await pipeline.Run(ctx); });
         }
     }
 
@@ -61,31 +54,22 @@ namespace Blog
                 args.Abort();
                 args.Context.Response.ContentType = "text/html";
 
-                var body = new StringBuilder();
-
-                foreach (var post in _posts.OrderByDescending(p => p.Published))
-                {
-                    body.AppendFormat("<h2><a href=\"{0}\">{1}</a></h2>", post.Url, post.Title);
-                    body.AppendFormat("<p>{0}</p>", post.Summary);
-                    body.AppendFormat("<code>Posted {0}, tags: {1}</code>", post.Published.ToHumaneString(), string.Join(", ", post.Tags));
-                }
-
-                await args.Context.Response.WriteAsync(string.Format(args.Layout, "Home", body));
+                await args.Context.Response.WriteAsync(string.Format(args.Layout, "Home", LayoutProcessor.RenderPostList(_posts.OrderByDescending(p => p.Published))));
             }
         }
     }
 
-    internal class SetLayoutProcessor : Processor
+    internal class LayoutProcessor : Processor
     {
         private readonly string _layout;
 
-        public SetLayoutProcessor(string title)
+        public LayoutProcessor(string title)
         {
             _layout = "<!DOCTYPE html>\n" +
                       "<html lang=\"en-US\">" +
                       "<head>" +
                       "<meta charset=\"utf-8\">" +
-                      "<meta name=\"viewport\" content=\"width=device-width,initial-scale= 1\">" +
+                      "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">" +
                       "<title>{0} - " + title + "</title>" +
                       "<link href=\"/content/blog.css\" rel=\"stylesheet\" type=\"text/css\" media=\"all\" />" +
                       "</head>" +
@@ -100,6 +84,73 @@ namespace Blog
         public override void Process(PipelineArgs args)
         {
             args.Layout = _layout;
+        }
+
+        public static string RenderPostList(IEnumerable<Post> posts)
+        {
+            var content = new StringBuilder();
+
+            foreach (var post in posts)
+            {
+                content.AppendFormat("<h2><a href=\"{0}\">{1}</a></h2>", post.Url, post.Title);
+                content.AppendFormat("<p>{0}</p>", post.Summary);
+                content.Append(RenderPostInfo(post));
+            }
+
+            return content.ToString();
+        }
+
+        public static string RenderPostInfo(Post post)
+        {
+            var content = new StringBuilder();
+
+            content.AppendFormat("<code>Posted {0}, tags: ", post.Published.ToHumaneString());
+
+            for (var i = 0; i < post.Tags.Count; i++)
+            {
+                var tag = post.Tags[i];
+
+                content.AppendFormat("<a href=\"{0}\">{1}</a>{2}", tag.Url, tag.Name, i < post.Tags.Count - 1 ? ", " : "");
+            }
+
+            content.Append("</code>");
+
+            return content.ToString();
+        }
+    }
+
+    internal class TagProcessor : Processor
+    {
+        private readonly PostRepository _posts;
+
+        public TagProcessor(PostRepository posts)
+        {
+            _posts = posts;
+        }
+
+        public override async Task ProcessAsync(PipelineArgs args)
+        {
+            var path = args.Context.Request.Path;
+
+            if (path.StartsWithSegments(new PathString("/tag")) && !path.Equals(new PathString("/tag")))
+            {
+                var tagName = path.Value.ToLowerInvariant().Replace("/tag/", "").Trim('/');
+                var posts = _posts.FindByTag(tagName).OrderByDescending(p => p.Published);
+
+                if (posts.Any())
+                {
+                    args.Abort();
+                    args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(1).TotalSeconds;
+
+                    var title = string.Format("Posts tagged with {0}:", tagName);
+                    var body = new StringBuilder();
+
+                    body.AppendFormat("<h1>{0}</h1>", title);
+                    body.Append(LayoutProcessor.RenderPostList(posts));
+
+                    await args.Context.Response.WriteAsync(string.Format(args.Layout, title, body));
+                }
+            }
         }
     }
 
@@ -125,7 +176,12 @@ namespace Blog
                     args.Abort();
                     args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(1).TotalSeconds;
 
-                    await args.Context.Response.WriteAsync(string.Format(args.Layout, post.Title, "<article>" + post.Content + "</article>"));
+                    var body = new StringBuilder();
+
+                    body.AppendFormat("<article>{0}</article>", post.Content);
+                    body.Append(LayoutProcessor.RenderPostInfo(post));
+
+                    await args.Context.Response.WriteAsync(string.Format(args.Layout, post.Title, body));
                 }
             }
         }
