@@ -25,16 +25,37 @@ namespace Blog
             const string title = "devandops";
             var posts = new PostRepository(new FileSystem(HostingEnvironment.MapPath("~/Posts")), new Cache());
 
-            app.RunPipeline(new Pipeline()
-                .Add(new RemoveServerHeaderProcessor())
-                .Add(new RobotsProcessor())
-                .Add(new RssProcessor(posts, title))
-                .Add(new SitemapProcessor(posts))
-                .Add(new LayoutProcessor(title))
-                .Add(new HomeProcessor(posts))
+            app.UsePipeline("/rss.xml", new DefaultPipeline()
+                .Add(new RssProcessor(posts, title)));
+
+            app.UsePipeline("/robots.txt", new DefaultPipeline()
+                .Add(new RobotsProcessor()));
+
+            app.UsePipeline("/sitemap.xml", new DefaultPipeline()
+                .Add(new SitemapProcessor(posts)));
+
+            app.UsePipeline("/posts", new DefaultPipeline()
+                .Add(new UseDefaultLayoutProcessor(title))
                 .Add(new PostProcessor(posts))
+                .Add(new NotFoundProcessor()));
+
+            app.UsePipeline("/tag", new DefaultPipeline()
+                .Add(new UseDefaultLayoutProcessor(title))
                 .Add(new TagProcessor(posts))
                 .Add(new NotFoundProcessor()));
+
+            app.UsePipeline(new DefaultPipeline()
+                .Add(new UseDefaultLayoutProcessor(title))
+                .Add(new HomeProcessor(posts))
+                .Add(new NotFoundProcessor()));
+        }
+    }
+
+    internal class DefaultPipeline : Pipeline
+    {
+        public DefaultPipeline()
+        {
+            Add(new RemoveServerHeaderProcessor());
         }
     }
 
@@ -54,39 +75,28 @@ namespace Blog
                 args.Abort();
                 args.Context.Response.ContentType = "text/html";
 
-                await args.Context.Response.WriteAsync(string.Format(args.Layout, "Home", LayoutProcessor.RenderPostList(_posts.OrderByDescending(p => p.Published))));
+                var content = await args.Layout.RenderAsync("Home", UseDefaultLayoutProcessor.GetPostListFragment(_posts.OrderByDescending(p => p.Published)));
+
+                await args.Context.Response.WriteAsync(content);
             }
         }
     }
 
-    internal class LayoutProcessor : Processor
+    internal class UseDefaultLayoutProcessor : Processor
     {
-        private readonly string _layout;
+        private readonly string _siteName;
 
-        public LayoutProcessor(string title)
+        public UseDefaultLayoutProcessor(string siteName)
         {
-            _layout = "<!DOCTYPE html>\n" +
-                      "<html lang=\"en-US\">" +
-                      "<head>" +
-                      "<meta charset=\"utf-8\">" +
-                      "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">" +
-                      "<title>{0} - " + title + "</title>" +
-                      "<link href=\"/content/blog.css\" rel=\"stylesheet\" type=\"text/css\" media=\"all\" />" +
-                      "</head>" +
-                      "<body>" +
-                      "<nav><a href=\"/\">" + title + "</a> | <a href=\"/rss.xml\">rss</a></nav>" +
-                      "{1}" +
-                      "<footer><p>reach out: <a href=\"https://twitter.com/pbering\">twitter.com/pbering</a>, <a href=\"https://github.com/pbering\">github.com/pbering</a></p></footer>" +
-                      "</body>" +
-                      "</html>";
+            _siteName = siteName;
         }
 
         public override void Process(PipelineArgs args)
         {
-            args.Layout = _layout;
+            args.Layout = new DefaultLayout(_siteName);
         }
 
-        public static string RenderPostList(IEnumerable<Post> posts)
+        public static string GetPostListFragment(IEnumerable<Post> posts)
         {
             var content = new StringBuilder();
 
@@ -94,17 +104,17 @@ namespace Blog
             {
                 content.AppendFormat("<h2><a href=\"{0}\">{1}</a></h2>", post.Url, post.Title);
                 content.AppendFormat("<p>{0}</p>", post.Summary);
-                content.Append(RenderPostInfo(post));
+                content.Append(GetPostInfoFragment(post));
             }
 
             return content.ToString();
         }
 
-        public static string RenderPostInfo(Post post)
+        public static string GetPostInfoFragment(Post post)
         {
             var content = new StringBuilder();
 
-            content.AppendFormat("<code>Posted {0}, tags: ", post.Published.ToHumaneString());
+            content.AppendFormat("<code>Posted {0}, tagged: ", post.Published.ToHumaneString());
 
             for (var i = 0; i < post.Tags.Count; i++)
             {
@@ -119,6 +129,34 @@ namespace Blog
         }
     }
 
+    internal class DefaultLayout : Layout
+    {
+        private readonly string _template;
+
+        public DefaultLayout(string siteName)
+        {
+            _template = "<!DOCTYPE html>\n" +
+                        "<html lang=\"en-US\">" +
+                        "<head>" +
+                        "<meta charset=\"utf-8\">" +
+                        "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">" +
+                        "<title>{0} - " + siteName + "</title>" +
+                        "<link href=\"/content/blog.css\" rel=\"stylesheet\" type=\"text/css\" media=\"all\" />" +
+                        "</head>" +
+                        "<body>" +
+                        "<nav><a href=\"/\">" + siteName + "</a> | <a href=\"/rss.xml\">rss</a></nav>" +
+                        "{1}" +
+                        "<footer><p>reach out: <a href=\"https://twitter.com/pbering\">twitter.com/pbering</a>, <a href=\"https://github.com/pbering\">github.com/pbering</a></p></footer>" +
+                        "</body>" +
+                        "</html>";
+        }
+
+        public override string Template
+        {
+            get { return _template; }
+        }
+    }
+
     internal class TagProcessor : Processor
     {
         private readonly PostRepository _posts;
@@ -130,26 +168,29 @@ namespace Blog
 
         public override async Task ProcessAsync(PipelineArgs args)
         {
-            var path = args.Context.Request.Path;
+            var name = args.Context.Request.Path.Value.Trim('/');
 
-            if (path.StartsWithSegments(new PathString("/tag")) && !path.Equals(new PathString("/tag")))
+            if (string.IsNullOrEmpty(name))
             {
-                var tagName = path.Value.ToLowerInvariant().Replace("/tag/", "").Trim('/');
-                var posts = _posts.FindByTag(tagName).OrderByDescending(p => p.Published);
+                return;
+            }
 
-                if (posts.Any())
-                {
-                    args.Abort();
-                    args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(1).TotalSeconds;
+            var posts = _posts.FindByTag(name).OrderByDescending(p => p.Published);
 
-                    var title = string.Format("Posts tagged with {0}:", tagName);
-                    var body = new StringBuilder();
+            if (posts.Any())
+            {
+                args.Abort();
+                args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(1).TotalSeconds;
 
-                    body.AppendFormat("<h1>{0}</h1>", title);
-                    body.Append(LayoutProcessor.RenderPostList(posts));
+                var title = string.Format("Posts tagged with {0}:", name);
+                var body = new StringBuilder();
 
-                    await args.Context.Response.WriteAsync(string.Format(args.Layout, title, body));
-                }
+                body.AppendFormat("<h2>{0}</h2>", title);
+                body.Append(UseDefaultLayoutProcessor.GetPostListFragment(posts));
+
+                var content = await args.Layout.RenderAsync(title, body);
+
+                await args.Context.Response.WriteAsync(content);
             }
         }
     }
@@ -165,24 +206,28 @@ namespace Blog
 
         public override async Task ProcessAsync(PipelineArgs args)
         {
-            var path = args.Context.Request.Path;
+            var name = args.Context.Request.Path.Value.Trim('/');
 
-            if (path.StartsWithSegments(new PathString("/posts")) && !path.Equals(new PathString("/posts")))
+            if (string.IsNullOrEmpty(name))
             {
-                var post = _posts.FindByName(path.Value.ToLowerInvariant().Replace("/posts/", "").Trim('/'));
+                return;
+            }
 
-                if (post != null)
-                {
-                    args.Abort();
-                    args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(1).TotalSeconds;
+            var post = _posts.FindByName(name);
 
-                    var body = new StringBuilder();
+            if (post != null)
+            {
+                args.Abort();
+                args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(1).TotalSeconds;
 
-                    body.AppendFormat("<article>{0}</article>", post.Content);
-                    body.Append(LayoutProcessor.RenderPostInfo(post));
+                var body = new StringBuilder();
 
-                    await args.Context.Response.WriteAsync(string.Format(args.Layout, post.Title, body));
-                }
+                body.AppendFormat("<article>{0}</article>", post.Content);
+                body.Append(UseDefaultLayoutProcessor.GetPostInfoFragment(post));
+
+                var content = await args.Layout.RenderAsync(post.Title, body);
+
+                await args.Context.Response.WriteAsync(content);
             }
         }
     }
@@ -191,22 +236,17 @@ namespace Blog
     {
         public override async Task ProcessAsync(PipelineArgs args)
         {
-            var path = args.Context.Request.Path;
+            args.Abort();
+            args.Context.Response.ContentType = "text/plain";
+            args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(7).TotalSeconds;
 
-            if (path.Value == "/robots.txt")
-            {
-                args.Abort();
-                args.Context.Response.ContentType = "text/plain";
-                args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(7).TotalSeconds;
+            var content = new StringBuilder();
 
-                var content = new StringBuilder();
+            content.Append("User-agent: *\n");
+            content.Append("Disallow: /content/\n");
+            content.AppendFormat("Sitemap: {0}://{1}/sitemap.xml\n", args.Context.Request.Scheme, args.Context.Request.Host.Value);
 
-                content.Append("User-agent: *\n");
-                content.Append("Disallow: /content/\n");
-                content.AppendFormat("Sitemap: {0}://{1}/sitemap.xml\n", args.Context.Request.Scheme, args.Context.Request.Host.Value);
-
-                await args.Context.Response.WriteAsync(content.ToString());
-            }
+            await args.Context.Response.WriteAsync(content.ToString());
         }
     }
 
@@ -221,37 +261,32 @@ namespace Blog
 
         public override async Task ProcessAsync(PipelineArgs args)
         {
-            var path = args.Context.Request.Path;
+            args.Abort();
+            args.Context.Response.ContentType = "text/xml";
+            args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(7).TotalSeconds;
 
-            if (path.Value == "/sitemap.xml")
-            {
-                args.Abort();
-                args.Context.Response.ContentType = "text/xml";
-                args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(7).TotalSeconds;
+            var serverUrl = args.Context.Request.Scheme + "://" + args.Context.Request.Host.Value;
 
-                var serverUrl = args.Context.Request.Scheme + "://" + args.Context.Request.Host.Value;
+            XNamespace ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
 
-                XNamespace ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
-
-                var document =
-                    new XDocument(
-                        new XDeclaration("1.0", "utf-8", null),
-                        new XElement(ns + "urlset",
+            var document =
+                new XDocument(
+                    new XDeclaration("1.0", "utf-8", null),
+                    new XElement(ns + "urlset",
+                        new XElement(ns + "url",
+                            new XElement(ns + "loc", serverUrl),
+                            new XElement(ns + "lastmod", DateTime.Now.ToString("yyyy-MM-dd")),
+                            new XElement(ns + "changefreq", "daily")),
+                        from post in _posts
+                        select
                             new XElement(ns + "url",
-                                new XElement(ns + "loc", serverUrl),
-                                new XElement(ns + "lastmod", DateTime.Now.ToString("yyyy-MM-dd")),
-                                new XElement(ns + "changefreq", "daily")),
-                            from post in _posts
-                            select
-                                new XElement(ns + "url",
-                                    new XElement(ns + "loc", serverUrl + post.Url),
-                                    new XElement(ns + "lastmod", post.Published.ToString("yyyy-MM-dd")),
-                                    new XElement(ns + "changefreq", "daily"))
-                            )
-                        );
+                                new XElement(ns + "loc", serverUrl + post.Url),
+                                new XElement(ns + "lastmod", post.Published.ToString("yyyy-MM-dd")),
+                                new XElement(ns + "changefreq", "daily"))
+                        )
+                    );
 
-                await args.Context.Response.WriteAsync(document.ToString());
-            }
+            await args.Context.Response.WriteAsync(document.ToString());
         }
     }
 
@@ -270,33 +305,28 @@ namespace Blog
 
         public override void Process(PipelineArgs args)
         {
-            var path = args.Context.Request.Path;
+            args.Abort();
+            args.Context.Response.ContentType = "application/rss+xml";
+            args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(7).TotalSeconds;
 
-            if (path.Value == "/rss.xml")
+            var serverUrl = args.Context.Request.Scheme + "://" + args.Context.Request.Host.Value;
+            var feed = new SyndicationFeed(_title, _description, new Uri(serverUrl + "/rss.xml"), "1", DateTime.Now)
             {
-                args.Abort();
-                args.Context.Response.ContentType = "application/rss+xml";
-                args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(7).TotalSeconds;
+                Items = _posts.Select(
+                    post => new SyndicationItem(
+                        post.Title,
+                        post.Summary,
+                        new Uri(serverUrl + post.Url.ToString()),
+                        post.Name,
+                        post.Published))
+                    .ToList()
+            };
 
-                var serverUrl = args.Context.Request.Scheme + "://" + args.Context.Request.Host.Value;
-                var feed = new SyndicationFeed(_title, _description, new Uri(serverUrl + "/rss.xml"), "1", DateTime.Now)
-                {
-                    Items = _posts.Select(
-                        post => new SyndicationItem(
-                            post.Title,
-                            post.Summary,
-                            new Uri(serverUrl + post.Url.ToString()),
-                            post.Name,
-                            post.Published))
-                        .ToList()
-                };
+            var formatter = new Rss20FeedFormatter(feed);
 
-                var formatter = new Rss20FeedFormatter(feed);
-
-                using (var writer = XmlWriter.Create(args.Context.Response.Body))
-                {
-                    formatter.WriteTo(writer);
-                }
+            using (var writer = XmlWriter.Create(args.Context.Response.Body))
+            {
+                formatter.WriteTo(writer);
             }
         }
     }

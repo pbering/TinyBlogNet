@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using Microsoft.Owin;
 
 namespace TinyBlogNet.Pipeline
@@ -9,7 +11,7 @@ namespace TinyBlogNet.Pipeline
             Context = ctx;
         }
 
-        public string Layout { get; set; }
+        public Layout Layout { get; set; }
         public IOwinContext Context { get; private set; }
         public bool IsAborted { get; private set; }
 
@@ -18,4 +20,5 @@ namespace TinyBlogNet.Pipeline
             IsAborted = true;
         }
     }
+
 }

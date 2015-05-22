@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.Owin;
 
 namespace TinyBlogNet.Pipeline
 {
@@ -15,10 +14,8 @@ namespace TinyBlogNet.Pipeline
             return this;
         }
 
-        public async Task Run(IOwinContext ctx)
+        public async Task Run(PipelineArgs args)
         {
-            var args = new PipelineArgs(ctx);
-
             foreach (var processor in _processors)
             {
                 if (!args.IsAborted)
