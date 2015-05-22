@@ -75,7 +75,7 @@ namespace Blog
                 args.Abort();
                 args.Context.Response.ContentType = "text/html";
 
-                var content = await args.Layout.RenderAsync("Home", UseDefaultLayoutProcessor.GetPostListFragment(_posts.OrderByDescending(p => p.Published)));
+                var content = await args.Layout.RenderAsync("Home", DefaultLayout.GetPostListFragment(_posts.OrderByDescending(p => p.Published)));
 
                 await args.Context.Response.WriteAsync(content);
             }
@@ -94,6 +94,29 @@ namespace Blog
         public override void Process(PipelineArgs args)
         {
             args.Layout = new DefaultLayout(_siteName);
+        }
+    }
+
+    internal class DefaultLayout : Layout
+    {
+        private readonly string _template;
+
+        public DefaultLayout(string siteName)
+        {
+            _template = "<!DOCTYPE html>\n" +
+                        "<html lang=\"en-US\">" +
+                        "<head>" +
+                        "<meta charset=\"utf-8\">" +
+                        "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">" +
+                        "<title>{0} - " + siteName + "</title>" +
+                        "<link href=\"/content/blog.css\" rel=\"stylesheet\" type=\"text/css\" media=\"all\" />" +
+                        "</head>" +
+                        "<body>" +
+                        "<nav><a href=\"/\">" + siteName + "</a> | <a href=\"/rss.xml\">rss</a></nav>" +
+                        "{1}" +
+                        "<footer><p>reach out: <a href=\"https://twitter.com/pbering\">twitter.com/pbering</a>, <a href=\"https://github.com/pbering\">github.com/pbering</a></p></footer>" +
+                        "</body>" +
+                        "</html>";
         }
 
         public static string GetPostListFragment(IEnumerable<Post> posts)
@@ -126,29 +149,6 @@ namespace Blog
             content.Append("</code>");
 
             return content.ToString();
-        }
-    }
-
-    internal class DefaultLayout : Layout
-    {
-        private readonly string _template;
-
-        public DefaultLayout(string siteName)
-        {
-            _template = "<!DOCTYPE html>\n" +
-                        "<html lang=\"en-US\">" +
-                        "<head>" +
-                        "<meta charset=\"utf-8\">" +
-                        "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">" +
-                        "<title>{0} - " + siteName + "</title>" +
-                        "<link href=\"/content/blog.css\" rel=\"stylesheet\" type=\"text/css\" media=\"all\" />" +
-                        "</head>" +
-                        "<body>" +
-                        "<nav><a href=\"/\">" + siteName + "</a> | <a href=\"/rss.xml\">rss</a></nav>" +
-                        "{1}" +
-                        "<footer><p>reach out: <a href=\"https://twitter.com/pbering\">twitter.com/pbering</a>, <a href=\"https://github.com/pbering\">github.com/pbering</a></p></footer>" +
-                        "</body>" +
-                        "</html>";
         }
 
         public override string Template
@@ -186,7 +186,7 @@ namespace Blog
                 var body = new StringBuilder();
 
                 body.AppendFormat("<h2>{0}</h2>", title);
-                body.Append(UseDefaultLayoutProcessor.GetPostListFragment(posts));
+                body.Append(DefaultLayout.GetPostListFragment(posts));
 
                 var content = await args.Layout.RenderAsync(title, body);
 
@@ -223,7 +223,7 @@ namespace Blog
                 var body = new StringBuilder();
 
                 body.AppendFormat("<article>{0}</article>", post.Content);
-                body.Append(UseDefaultLayoutProcessor.GetPostInfoFragment(post));
+                body.Append(DefaultLayout.GetPostInfoFragment(post));
 
                 var content = await args.Layout.RenderAsync(post.Title, body);
 
