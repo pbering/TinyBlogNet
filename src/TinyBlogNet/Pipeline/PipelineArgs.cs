@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.Owin;
 
 namespace TinyBlogNet.Pipeline
@@ -20,5 +18,4 @@ namespace TinyBlogNet.Pipeline
             IsAborted = true;
         }
     }
-
 }
