@@ -31,6 +31,7 @@ namespace Blog.Pipeline
             {
                 args.Abort();
                 args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(1).TotalSeconds;
+                args.Context.Response.ContentType = "text/html";
 
                 var title = string.Format("Posts tagged with {0}:", name);
                 var body = new StringBuilder();

@@ -9,7 +9,7 @@ namespace Blog.Pipeline
         {
             args.Abort();
             args.Context.Response.StatusCode = 404;
-            args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromHours(1).TotalSeconds;
+            args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(1).TotalSeconds;
         }
     }
 }

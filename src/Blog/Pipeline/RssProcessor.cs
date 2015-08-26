@@ -39,6 +39,8 @@ namespace Blog.Pipeline
                     .ToList()
             };
 
+            // TODO: Fix so gzip compression works...
+
             var formatter = new Rss20FeedFormatter(feed);
 
             using (var writer = XmlWriter.Create(args.Context.Response.Body))
