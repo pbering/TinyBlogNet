@@ -33,7 +33,7 @@ namespace Blog.Pipeline
                 args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(1).TotalSeconds;
                 args.Context.Response.ContentType = "text/html";
 
-                var title = string.Format("Posts tagged with {0}:", name);
+                var title = $"Posts tagged with {name}:";
                 var body = new StringBuilder();
 
                 body.AppendFormat("<h2>{0}</h2>", title);

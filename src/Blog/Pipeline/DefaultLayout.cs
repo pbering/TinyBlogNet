@@ -7,11 +7,9 @@ namespace Blog.Pipeline
 {
     internal class DefaultLayout : Layout
     {
-        private readonly string _template;
-
         public DefaultLayout(string siteName)
         {
-            _template = "<!DOCTYPE html>\n" +
+            Template = "<!DOCTYPE html>\n" +
                         "<html lang=\"en-US\">" +
                         "<head>" +
                         "<meta charset=\"utf-8\">" +
@@ -28,10 +26,7 @@ namespace Blog.Pipeline
                         "</html>";
         }
 
-        public override string Template
-        {
-            get { return _template; }
-        }
+        public override string Template { get; }
 
         public static string GetPostListFragment(IEnumerable<Post> posts)
         {

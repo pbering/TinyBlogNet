@@ -10,15 +10,15 @@ namespace TinyBlogNet
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentException("Can not be null or empty", "name");
+                throw new ArgumentException("Can not be null or empty", nameof(name));
             }
 
-            Url = new Uri(string.Format("/tag/{0}", name.ToLowerInvariant()), UriKind.Relative);
+            Url = new Uri($"/tag/{name.ToLowerInvariant()}", UriKind.Relative);
             Name = name.First().ToString(CultureInfo.InvariantCulture).ToUpper() + string.Join("", name.Skip(1));
         }
 
         public Uri Url { get; private set; }
-        public string Name { get; private set; }
+        public string Name { get; }
 
         protected bool Equals(Tag other)
         {

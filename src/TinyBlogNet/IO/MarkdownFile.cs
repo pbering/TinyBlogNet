@@ -99,7 +99,7 @@ namespace TinyBlogNet.IO
             {
                 if (!optional)
                 {
-                    throw new HeaderNotFoundException(string.Format("'{0}' was not found in '{1}'", key, _file.FullName));
+                    throw new HeaderNotFoundException($"'{key}' was not found in '{_file.FullName}'");
                 }
             }
 

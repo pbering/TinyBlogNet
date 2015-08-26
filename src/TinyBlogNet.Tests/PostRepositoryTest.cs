@@ -12,7 +12,7 @@ namespace TinyBlogNet.Tests
         public void load_posts()
         {
             //// Arrange
-            var filesystem = Substitute.For<FileSystem>(new object[] {string.Empty});
+            var filesystem = Substitute.For<FileSystem>(string.Empty);
 
             filesystem.GetFiles(Arg.Any<string>())
                 .Returns(info => new[] {GetFileMock(), GetFileMock(), GetFileMock()});
@@ -30,7 +30,7 @@ namespace TinyBlogNet.Tests
         public void load_posts_by_tag()
         {
             //// Arrange
-            var filesystem = Substitute.For<FileSystem>(new object[] {string.Empty});
+            var filesystem = Substitute.For<FileSystem>(string.Empty);
 
             filesystem.GetFiles(Arg.Any<string>())
                 .Returns(info => new[] {GetFileMock("Code, sitecore"), GetFileMock("Sitecore, Test"), GetFileMock("Test, Code")});
@@ -54,7 +54,7 @@ namespace TinyBlogNet.Tests
         public void load_single_post_by_name()
         {
             //// Arrange
-            var filesystem = Substitute.For<FileSystem>(new object[] {string.Empty});
+            var filesystem = Substitute.For<FileSystem>(string.Empty);
 
             filesystem.GetFiles(Arg.Any<string>())
                 .Returns(info => new[] {GetFileMock()});
