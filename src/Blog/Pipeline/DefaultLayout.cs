@@ -35,7 +35,7 @@ namespace Blog.Pipeline
 
             foreach (var post in posts)
             {
-                content.AppendFormat("<h2><a href=\"{0}\">{1}</a></h2>", post.Url, post.Title);
+                content.AppendFormat("<h1><a href=\"{0}\">{1}</a></h1>", post.Url, post.Title);
                 content.AppendFormat("<p>{0}</p>", post.Summary);
                 content.Append(GetPostInfoFragment(post));
             }

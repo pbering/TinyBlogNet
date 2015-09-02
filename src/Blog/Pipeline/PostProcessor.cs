@@ -34,6 +34,7 @@ namespace Blog.Pipeline
 
                 var body = new StringBuilder();
 
+                body.AppendFormat("<h1><a href=\"{0}\">{1}</a></h1>", post.Url, post.Title);
                 body.AppendFormat("<article>{0}</article>", post.Content);
                 body.Append(DefaultLayout.GetPostInfoFragment(post));
 

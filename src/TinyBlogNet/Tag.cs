@@ -13,7 +13,7 @@ namespace TinyBlogNet
                 throw new ArgumentException("Can not be null or empty", nameof(name));
             }
 
-            Url = new Uri($"/tag/{name.ToLowerInvariant()}", UriKind.Relative);
+            Url = new Uri($"/tags/{name.ToLowerInvariant()}", UriKind.Relative);
             Name = name.First().ToString(CultureInfo.InvariantCulture).ToUpper() + string.Join("", name.Skip(1));
         }
 

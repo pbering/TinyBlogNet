@@ -27,12 +27,12 @@ namespace Blog
             app.UsePipeline("/sitemap.xml", new DefaultPipeline()
                 .Add(new SitemapProcessor(posts)));
 
-            app.UsePipeline("/post", new DefaultPipeline()
+            app.UsePipeline("/posts", new DefaultPipeline()
                 .Add(new UseDefaultLayoutProcessor(title))
                 .Add(new PostProcessor(posts))
                 .Add(new NotFoundProcessor()));
 
-            app.UsePipeline("/tag", new DefaultPipeline()
+            app.UsePipeline("/tags", new DefaultPipeline()
                 .Add(new UseDefaultLayoutProcessor(title))
                 .Add(new TagProcessor(posts))
                 .Add(new NotFoundProcessor()));
