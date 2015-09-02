@@ -29,7 +29,7 @@ namespace Blog.Pipeline
             if (post != null)
             {
                 args.Abort();
-                args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(1).TotalSeconds;
+                args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(7).TotalSeconds;
                 args.Context.Response.ContentType = "text/html";
 
                 var body = new StringBuilder();

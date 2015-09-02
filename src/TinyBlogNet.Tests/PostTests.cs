@@ -109,7 +109,7 @@ namespace TinyBlogNet.Tests
 
             //// Assert
             post.Name.Should().Be("this-is-another-test");
-            post.Url.Should().Be(new Uri("/posts/this-is-another-test", UriKind.Relative));
+            post.Url.Should().Be(new Uri("/post/this-is-another-test", UriKind.Relative));
             post.Content.Should().Be("<h2>TEST</h2>\n\n<p>This is a Test</p>\n");
             post.Title.Should().Be("This is a test");
             post.Summary.Should().Be("This is a summary");

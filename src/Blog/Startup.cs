@@ -27,7 +27,7 @@ namespace Blog
             app.UsePipeline("/sitemap.xml", new DefaultPipeline()
                 .Add(new SitemapProcessor(posts)));
 
-            app.UsePipeline("/posts", new DefaultPipeline()
+            app.UsePipeline("/post", new DefaultPipeline()
                 .Add(new UseDefaultLayoutProcessor(title))
                 .Add(new PostProcessor(posts))
                 .Add(new NotFoundProcessor()));
