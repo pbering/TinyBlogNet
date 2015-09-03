@@ -15,7 +15,6 @@ namespace Blog.Pipeline
                         "<meta charset=\"utf-8\">" +
                         "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">" +
                         "<title>{0} - " + siteName + "</title>" +
-                        "<link rel=\"icon\" type=\"image/png\" href=\"/content/favicon.png\" />" +
                         "<link href=\"/content/blog.css\" rel=\"stylesheet\" type=\"text/css\" media=\"all\" />" +
                         "<link rel=\"alternate\" type=\"application/rss+xml\" title=\""+ siteName + "\" href=\"/rss.xml\" />" +
                         "</head>" +

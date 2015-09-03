@@ -15,7 +15,7 @@ namespace Blog
     {
         public void Configuration(IAppBuilder app)
         {
-            const string title = "devandops";
+            const string title = "invokecommand.net";
             var posts = new PostRepository(new FileSystem(HostingEnvironment.MapPath("~/Posts")), new Cache());
 
             app.UsePipeline("/rss.xml", new DefaultPipeline()

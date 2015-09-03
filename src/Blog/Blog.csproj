@@ -71,7 +71,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\blog.css" />
-    <Content Include="Content\favicon.png" />
     <Content Include="packages.config" />
     <Content Include="Posts\fixing-the-sitecore-mediaprovider.md" />
     <Content Include="Posts\this-is-a-test-one.md" />
