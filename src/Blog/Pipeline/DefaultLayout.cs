@@ -15,6 +15,7 @@ namespace Blog.Pipeline
                         "<meta charset=\"utf-8\">" +
                         "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">" +
                         "<title>{0} - " + siteName + "</title>" +
+                        "<style>html {{ background-color: #1e1e1e; }} body {{ color: #d4d4c9; font-family:\"Courier New\", Courier, monospace; font-size:1.1em;}}</style>" +
                         "<link href=\"/content/blog.css\" rel=\"stylesheet\" type=\"text/css\" media=\"all\" />" +
                         "<link rel=\"alternate\" type=\"application/rss+xml\" title=\""+ siteName + "\" href=\"/rss.xml\" />" +
                         "</head>" +
