@@ -21,7 +21,7 @@ namespace Blog.Pipeline
             if (args.Context.Request.Path.Equals(new PathString("/")))
             {
                 args.Abort();
-                args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(7).TotalSeconds;
+                args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(1).TotalSeconds;
                 args.Context.Response.ContentType = "text/html";
 
                 var content = await args.Layout.RenderAsync("Home", DefaultLayout.GetPostListFragment(_posts.OrderByDescending(p => p.Published)));

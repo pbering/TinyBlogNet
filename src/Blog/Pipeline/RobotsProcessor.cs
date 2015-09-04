@@ -11,7 +11,7 @@ namespace Blog.Pipeline
         {
             args.Abort();
             args.Context.Response.ContentType = "text/plain";
-            args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(7).TotalSeconds;
+            args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(30).TotalSeconds;
 
             var content = new StringBuilder();
 

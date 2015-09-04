@@ -20,7 +20,7 @@ namespace Blog.Pipeline
         {
             args.Abort();
             args.Context.Response.ContentType = "text/xml";
-            args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(7).TotalSeconds;
+            args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(1).TotalSeconds;
 
             var serverUrl = args.Context.Request.Scheme + "://" + args.Context.Request.Host.Value;
 

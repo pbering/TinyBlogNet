@@ -30,7 +30,7 @@ namespace Blog.Pipeline
             if (posts.Any())
             {
                 args.Abort();
-                args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(7).TotalSeconds;
+                args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(1).TotalSeconds;
                 args.Context.Response.ContentType = "text/html";
 
                 var title = $"Posts tagged with {name}:";
