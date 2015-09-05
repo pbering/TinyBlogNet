@@ -1,28 +1,20 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using System.Xml.Linq;
-using TinyBlogNet;
-using TinyBlogNet.Pipeline;
 
-namespace Blog.Pipeline
+namespace MvcBlog.Controllers
 {
-    internal class SitemapProcessor : Processor
+    [RoutePrefix("sitemap.xml")]
+    [Route("{action=Index}")]
+    public class SitemapController : Controller
     {
-        private readonly PostRepository _posts;
-
-        public SitemapProcessor(PostRepository posts)
+        [OutputCache(Duration = 86400, VaryByParam = "None")]
+        public async Task<ActionResult> Index()
         {
-            _posts = posts;
-        }
-
-        public override async Task ProcessAsync(PipelineArgs args)
-        {
-            args.Abort();
-            args.Context.Response.ContentType = "text/xml";
-            args.Context.Response.Headers["Cache-Control"] = "max-age=" + TimeSpan.FromDays(1).TotalSeconds;
-
-            var serverUrl = args.Context.Request.Scheme + "://" + args.Context.Request.Host.Value;
+            var posts = await Task.Run(() => MvcApplication.Posts);
+            var serverUrl = Request.Url.GetLeftPart(UriPartial.Authority);
 
             XNamespace ns = "http://www.sitemaps.org/schemas/sitemap/0.9";
 
@@ -34,7 +26,7 @@ namespace Blog.Pipeline
                             new XElement(ns + "loc", serverUrl),
                             new XElement(ns + "lastmod", DateTime.Now.ToString("yyyy-MM-dd")),
                             new XElement(ns + "changefreq", "daily")),
-                        from post in _posts
+                        from post in posts
                         select
                             new XElement(ns + "url",
                                 new XElement(ns + "loc", serverUrl + post.Url),
@@ -43,7 +35,7 @@ namespace Blog.Pipeline
                         )
                     );
 
-            await args.Context.Response.WriteAsync(document.ToString());
+            return Content(document.ToString(), "text/xml");
         }
     }
 }

@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22609.0
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyBlogNet", "src\TinyBlogNet\TinyBlogNet.csproj", "{1544C484-EAE1-4C6D-9A9C-8F906354C18A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyBlogNet.Tests", "src\TinyBlogNet.Tests\TinyBlogNet.Tests.csproj", "{7BF1BB8E-4B74-4167-88F9-2C8120DDCA24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog", "src\Blog\Blog.csproj", "{7D8ABE7C-465C-491F-A61C-0508C6ECA9AE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcBlog", "src\MvcBlog\MvcBlog.csproj", "{A3FD1439-B31D-4176-9B66-16379BDC5243}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{7BF1BB8E-4B74-4167-88F9-2C8120DDCA24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BF1BB8E-4B74-4167-88F9-2C8120DDCA24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BF1BB8E-4B74-4167-88F9-2C8120DDCA24}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7D8ABE7C-465C-491F-A61C-0508C6ECA9AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7D8ABE7C-465C-491F-A61C-0508C6ECA9AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7D8ABE7C-465C-491F-A61C-0508C6ECA9AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7D8ABE7C-465C-491F-A61C-0508C6ECA9AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3FD1439-B31D-4176-9B66-16379BDC5243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3FD1439-B31D-4176-9B66-16379BDC5243}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3FD1439-B31D-4176-9B66-16379BDC5243}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3FD1439-B31D-4176-9B66-16379BDC5243}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
