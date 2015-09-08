@@ -1,15 +1,9 @@
-﻿@using TinyBlogNet
-@model MvcBlog.Models.HomeModel
+﻿@model MvcBlog.Models.HomeModel
 @foreach (var post in @Model.Posts)
 {
-    <h1><a href="@post.Url">@post.Title</a></h1>
+    <h1>
+        <a href="@post.Url">@post.Title</a>
+    </h1>
     <p>@post.Summary</p>
-    <code>Posted @post.Published.ToHumaneString(), tagged:
-    @for(int i = 0; i < @post.Tags.Count; i++)
-    {
-        var tag = @post.Tags[i];
-
-        <a href="@tag.Url">@tag.Name</a>@(i < post.Tags.Count - 1 ? ", " : "")
-    }
-    </code>
+    @Html.Partial("~/Views/Shared/_Tagged.cshtml", post)
 }

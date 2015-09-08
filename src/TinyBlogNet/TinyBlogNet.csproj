@@ -64,11 +64,6 @@
     <Compile Include="Exceptions\InvalidHeaderException.cs" />
     <Compile Include="Exceptions\ParseException.cs" />
     <Compile Include="IO\NullCache.cs" />
-    <Compile Include="Pipeline\AppBuilderExtensions.cs" />
-    <Compile Include="Pipeline\Layout.cs" />
-    <Compile Include="Pipeline\Pipeline.cs" />
-    <Compile Include="Pipeline\PipelineArgs.cs" />
-    <Compile Include="Pipeline\Processor.cs" />
     <Compile Include="IO\MarkdownFile.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="PostRepository.cs" />
