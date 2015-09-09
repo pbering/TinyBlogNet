@@ -8,7 +8,7 @@ namespace MvcBlog.Controllers
     [RoutePrefix("tags")]
     public class TagController : Controller
     {
-        [OutputCache(Duration = 86400, VaryByParam = "None")]
+        [OutputCache(CacheProfile = "Day")]
         [Route("{*name}")]
         public async Task<ActionResult> Index(string name)
         {

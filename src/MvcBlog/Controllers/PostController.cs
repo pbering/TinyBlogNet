@@ -6,7 +6,7 @@ namespace MvcBlog.Controllers
     [RoutePrefix("posts")]
     public class PostController : Controller
     {
-        [OutputCache(Duration = 86400, VaryByParam = "None")]
+        [OutputCache(CacheProfile = "Day")]
         [Route("{*name}")]
         public async Task<ActionResult> Index(string name)
         {

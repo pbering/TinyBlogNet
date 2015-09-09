@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using System.Web.Mvc;
 
 namespace MvcBlog.Controllers
@@ -8,14 +7,14 @@ namespace MvcBlog.Controllers
     [Route("{action=Index}")]
     public class RobotsController : Controller
     {
-        [OutputCache(Duration = 86400, VaryByParam = "None")]
+        [OutputCache(CacheProfile = "Month")]
         public ActionResult Index()
         {
             var content = new StringBuilder();
 
             content.Append("User-agent: *\n");
-            content.Append("Disallow: /content/\n");
-            content.AppendFormat("Sitemap: {0}/sitemap.xml\n", Request.Url.GetLeftPart(UriPartial.Authority));
+            content.Append("Disallow: /tags/\n");
+            content.AppendFormat("Sitemap: {0}\n", this.ServerUrl("/sitemap.xml"));
 
             return Content(content.ToString(), "text/plain");
         }

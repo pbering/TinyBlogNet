@@ -7,7 +7,7 @@ namespace MvcBlog.Controllers
 {
     public class HomeController : Controller
     {
-        [OutputCache(Duration = 86400, VaryByParam = "None")]
+        [OutputCache(CacheProfile = "Day")]
         public async Task<ActionResult> Index()
         {
             ViewBag.Title = "Home";
