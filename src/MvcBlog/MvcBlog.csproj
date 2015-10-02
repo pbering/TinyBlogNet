@@ -167,6 +167,7 @@
     <Content Include="Views\Shared\_Tagged.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Posts\sitecore-cd-nodes-not-picking-up-events.md" />
     <None Include="Web.Production.config" />
   </ItemGroup>
   <PropertyGroup>
