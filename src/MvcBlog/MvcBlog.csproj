@@ -140,18 +140,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Posts\fixing-the-sitecore-mediaprovider.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Data\Posts\this-is-a-test-one.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Data\Posts\this-is-a-test-three.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_Data\Posts\this-is-a-test-two.md" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Post\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

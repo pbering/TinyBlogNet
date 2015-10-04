@@ -1,7 +1,7 @@
 ---
 title: Sitecore CD nodes not picking up events after replication re-initialization
 summary: What happens with CD nodes after replication re-initialization and why do they ignore all events?
-date: 2015-10-07
+date: 2015-10-04
 tags: Sitecore, SQL, Notes
 ---
 
