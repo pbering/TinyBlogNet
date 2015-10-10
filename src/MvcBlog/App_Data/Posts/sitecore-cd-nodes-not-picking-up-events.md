@@ -30,7 +30,7 @@ On a Sitecore CD node the EventQueue is being checked for new events every 2 sec
 It has the string value (the type is ntext) of the latest raised event from the [Stamp] column (the type is [timestamp]) in the EventQueue table. So with each check Sitecore asks only for events **newer** that the last raised event.
 
 The problem with this is the use of [timestamp], the value of [timestamp] on insert and deleted is a binary counter that is relative in the database, from [MSDN](https://msdn.microsoft.com/en-us/library/ms182776.aspx):
-**
+
 >Each database has a counter that is incremented for each insert or update operation that is performed on a table that contains a rowversion column within the database. This counter is the database rowversion. **This tracks a relative time within a database, not an actual time that can be associated with a clock**
 
 So what happens here is that the CD nodes *thinks* it has checked events from a certain point in time, but all new events is "older" since SQL Server is starting over with the value of [timestamp].
