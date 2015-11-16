@@ -24,7 +24,6 @@
         h1 { font-size: 1.3em; }
 
         nav {
-            border-bottom: #d4d4c9 dashed 2px;
             font-weight: bold;
             padding-bottom: 25px;
         }
@@ -38,7 +37,12 @@
             margin-top: 25px;
         }
 
-        article code {
+        code {
+            background-color: #404040;
+            padding: 2px 5px 2px 5px;
+        }
+
+        article pre code {
             background-color: #404040;
             display: block;
             overflow: auto;
@@ -65,8 +69,7 @@
 <nav><a href="/">invokecommand.net</a> | <a href="/rss.xml">rss</a></nav>
 @RenderBody()
 <footer>
-    <p>reach out: <a href="https://twitter.com/pbering">twitter.com/pbering</a>, <a href="https://github.com/pbering">github.com/pbering</a>
-    </p>
+    <p><a href="https://twitter.com/pbering">twitter.com/pbering</a>, <a href="https://github.com/pbering">github.com/pbering</a></p>
 </footer>
 </body>
 </html>

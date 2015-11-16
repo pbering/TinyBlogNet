@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Posts\sitecore-cd-nodes-not-picking-up-events.md" />
+    <Content Include="App_Data\Posts\live-mode-tds-and-workflows-gotcha.md" />
     <None Include="Web.Production.config" />
   </ItemGroup>
   <PropertyGroup>
