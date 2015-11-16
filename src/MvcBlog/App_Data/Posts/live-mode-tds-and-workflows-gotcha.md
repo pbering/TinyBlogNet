@@ -25,4 +25,4 @@ So I wanted to add that template and its the __Standard Values item to my TDS pr
 
 I was a bit puzzled at first and could not find the reason for why this was not working as expected. Since my TDS project was configured to use the master database, and I ***thought*** that the TDS connector was running in shell context and would then not be affected of any setting on the "website" site configuration.
 
-Then a good college of mine (Thanks Jesper) pointed me in the right direction to simple set filterItems="false" and to my surprise it worked!
+Then a good college of mine (Thanks Jesper) pointed me in the right direction to simple set `filterItems="false"` and to my surprise it worked!
