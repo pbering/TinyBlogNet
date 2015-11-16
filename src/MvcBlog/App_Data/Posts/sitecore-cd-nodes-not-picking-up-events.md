@@ -15,7 +15,7 @@ tags: Sitecore, SQL, Notes
 
 You are using SQL Server replication on one or more Sitecore databases, typically the web database to keep databases in sync across data centers. Things runs fine but then you need to make changes to the replication where you need to remove subscribers and reinitialize them again. Could be to physically move databases to another cluster or during recovery.
 
-This happen to me twice so I figured I needed to write it down :) 
+This happened to me twice now, so I figured I needed to write it down :) 
 
 In my case I had the web database on-premise as the publisher and two subscribers, one located in a data center in Europe and one in the US. During a routine task the DBA had to remove the replication and reinitialize subscribers from a snapshot. After that our editors started to report that they could not see their changes after publish. While investigating logs on the CD nodes I found that no remote events was being fired at all, not even publish:end:remote where HtmlCacheClearer normally would write an entry when it does. 
 

@@ -1,6 +1,6 @@
 ---
 title: Live Mode, TDS and workflow settings on Standard Values gotcha
-summary: Using TDS to manage a template with workflow settings on the standard values item is not able to sync
+summary: When using TDS to manage a template with workflow settings on the standard values item then you can't add it to a TDS project
 date: 2015-11-16
 tags: TDS, Sitecore, Notes
 ---
