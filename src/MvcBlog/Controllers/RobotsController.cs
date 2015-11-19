@@ -13,7 +13,6 @@ namespace MvcBlog.Controllers
             var content = new StringBuilder();
 
             content.Append("User-agent: *\n");
-            content.Append("Disallow: /tags/\n");
             content.AppendFormat("Sitemap: {0}\n", this.ServerUrl("/sitemap.xml"));
 
             return Content(content.ToString(), "text/plain");
