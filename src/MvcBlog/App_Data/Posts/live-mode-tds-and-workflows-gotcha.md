@@ -4,6 +4,9 @@ summary: When using TDS to manage a template with workflow settings on the stand
 date: 2015-11-16
 tags: TDS, Sitecore, Notes
 ---
+##UPDATE 2015-11-19##
+
+> Hedgehog Development, the guys that makes TDS has fixed this issue in the next release, presumable v5.1.0.23 which I also tested. Thank you for the superb support!
 
 ###Lesson learned###
 
