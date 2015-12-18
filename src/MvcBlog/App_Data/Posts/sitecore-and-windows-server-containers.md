@@ -5,6 +5,10 @@ date: 2015-11-23
 tags: Sitecore, Containers, WSC
 ---
 
+### Be sure to also read... ###
+
+Part 2: [Tips and trick](/posts/sitecore-and-windows-server-containers-part-2)
+
 ### Say what? ###
 
 Today it's possible to run .NET applications built with ASP.NET 5 targeting CoreCLR, natively on Linux. **But for applications like Sitecore that is based on ASP.NET 4.5 and the full .NET framework, Windows and IIS on bare metal or VM's are our only options, until now that is.** 
