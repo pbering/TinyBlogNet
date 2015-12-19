@@ -23,7 +23,7 @@ Here you can find some tips and tricks I picked up while playing around with thi
 	1. Copy `ServerDatacenterCore_en-us_TP4_Container.vhd` to `ServerDatacenterCore_en-us_TP4_Container_Extended.vhd`.
 	2. Use the "Edit disk" feature in Hyper-V to expand it.
 	3. Double-click the new expanded VHD to mount it.
-	4. Use "Disk Management" to resize the OS volume.
+	4. Use "Disk Management" to re-size the OS volume.
 	5. Use "Explorer" to eject the mounted VHD.
 	6. Use VhdPath parameter of New-ContainerHost.ps1 to reference the expanded VHD.
 
@@ -47,7 +47,7 @@ Delete all stopped containers:
 
 	docker rm $(docker ps -a -q)
 
-Delete all "<none>" tagged images:
+Delete all tagged images tagged with "none":
 	
 	docker rmi $(docker images -q -f dangling=true)
 
