@@ -1,6 +1,6 @@
 ---
 title: Sitecore running in a Windows Server Container - Part 2
-summary: Tips and trick for working containers and hosts.
+summary: Tips and tricks for working with containers and hosts.
 date: 2015-12-18
 tags: Sitecore, Containers, WSC, Notes
 ---
@@ -29,7 +29,8 @@ Here you can find some tips and tricks I picked up while playing around with thi
 
 ###Connecting with the host VM from your workstation###
 
-1. On the host add ` -H 0.0.0.0:2375` right after the first occurrence of `-b "Virtual Switch"` and before the `goto` in the file "c:\ProgramData\docker\runDockerDaemon.cmd"
+1. On the host add **" -H 0.0.0.0:2375"** right after the first occurrence of **"-b "Virtual Switch"** and before the **"goto"** in the file **"c:\ProgramData\docker\runDockerDaemon.cmd"**
+
 2. Run `net stop docker` and `net start docker` to restart the Docker daemon
 3. Open the new port with:
 
