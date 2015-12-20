@@ -54,4 +54,4 @@ Delete all tagged images tagged with "none":
 ###Other stuff###
 
 - Modifying NTFS permissions in containers [does not work](https://social.msdn.microsoft.com/Forums/en-US/fbb8bd89-d86d-4609-8607-558b28f93592/ntfs-permissions-not-committed?forum=windowscontainers) - Everything must run as LocalSystem...
-- Please go vote on [Native container support on Windows 10](https://windowsserver.uservoice.com/forums/304624-containers/suggestions/11120520-native-container-support-on-windows-10)! So we can run containers without and extra a host VM layer.
+- Please go vote on [Native container support on Windows 10](https://windowsserver.uservoice.com/forums/304624-containers/suggestions/11120520-native-container-support-on-windows-10) so we can run containers without an extra host VM layer.
