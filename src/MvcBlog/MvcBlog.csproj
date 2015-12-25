@@ -159,6 +159,9 @@
     <Content Include="App_Data\Posts\live-mode-tds-and-workflows-gotcha.md" />
     <Content Include="App_Data\Posts\sitecore-and-windows-server-containers.md" />
     <Content Include="App_Data\Posts\sitecore-and-windows-server-containers-part-2.md" />
+    <Content Include=".well-known\acme-challenge\HOOH4qyHwBUEyM2sQC3HriHxsKjA5wKczUvC0Y6M6Fg" />
+    <Content Include=".well-known\acme-challenge\RfBWFhPZZAJ8CI4mCHdVXjLus0TIW9Y98fkmsUzA7k0" />
+    <Content Include=".well-known\acme-challenge\Web.config" />
     <None Include="Web.Production.config" />
   </ItemGroup>
   <PropertyGroup>
