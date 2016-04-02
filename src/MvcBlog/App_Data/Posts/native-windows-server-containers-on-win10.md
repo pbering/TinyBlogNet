@@ -1,6 +1,6 @@
 ---
 title: Native Windows Server Container support on Windows 10 is coming
-summary: Tips and tricks for working with containers and hosts.
+summary: Awesome Build 2016 announcements...
 date: 2016-04-02
 tags: Containers, WSC, Windows
 ---
