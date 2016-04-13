@@ -16,21 +16,31 @@
             font-size: 1.1em;
             margin-left: auto;
             margin-right: auto;
-            max-width: 800px;
+            max-width: 1024px;
             padding-top: 1em;
             width: 90%;
         }
 
-        h1 { font-size: 1.3em; }
+        h1 {
+            font-size: 1.3em;
+        }
 
         nav {
             font-weight: bold;
             padding-bottom: 25px;
         }
 
-        a { color: #d4d4c9; }
+        a {
+            color: #d4d4c9;
+            border-bottom: solid 2px #d4d4c9;
+            display: inline;
+            padding-bottom: 0px;
+            text-decoration: none;
+        }
 
-        a:hover { color: white; }
+        a:hover {
+            color: white;
+        }
 
         footer {
             border-top: #d4d4c9 dashed 2px;
@@ -49,18 +59,21 @@
             padding: 10px;
         }
 
-        article blockquote {
-            font-style: italic
+        p, pre, li {
+            line-height: 150%;
         }
 
+        article blockquote {
+            font-style: italic;
+        }
     </style>
-    <link rel="alternate" type="application/rss+xml" title="@ViewBag.SiteName" href="/rss.xml"/>
+    <link rel="alternate" type="application/rss+xml" title="@ViewBag.SiteName" href="/rss.xml" />
 </head>
 <body>
-<nav><a href="/">invokecommand.net</a> | <a href="/rss.xml">rss</a></nav>
-@RenderBody()
-<footer>
-    <p><a href="https://twitter.com/pbering">twitter.com/pbering</a>, <a href="https://github.com/pbering">github.com/pbering</a></p>
-</footer>
+    <nav><a href="/">invokecommand.net</a> | <a href="/rss.xml">rss</a></nav>
+    @RenderBody()
+    <footer>
+        <p><a href="https://twitter.com/pbering">twitter.com/pbering</a>, <a href="https://github.com/pbering">github.com/pbering</a></p>
+    </footer>
 </body>
 </html>
