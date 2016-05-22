@@ -1,5 +1,7 @@
 ﻿@using TinyBlogNet
 @model Post
-<h1><a href="@Model.Url">@Model.Title</a></h1>
-<article>@Html.Raw(@Model.Content)</article>
-@Html.Partial("~/Views/Shared/_Tagged.cshtml", @Model)
+<div class="post">
+    <h1 class="post-title"><a href="@Model.Url">@Model.Title</a></h1>
+    @Html.Raw(@Model.Content)
+    @Html.Partial("~/Views/Shared/_Tagged.cshtml", @Model)
+</div>

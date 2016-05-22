@@ -1,79 +1,36 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title>@ViewBag.Title - invokecommand.net</title>
-    <style>
-        html {
-            background-color: #1e1e1e;
-            overflow-y: scroll;
-        }
-
-        body {
-            color: #d4d4c9;
-            font-family: "Courier New", Courier, monospace;
-            font-size: 1.1em;
-            margin-left: auto;
-            margin-right: auto;
-            max-width: 1024px;
-            padding-top: 1em;
-            width: 90%;
-        }
-
-        h1 {
-            font-size: 1.3em;
-        }
-
-        nav {
-            font-weight: bold;
-            padding-bottom: 25px;
-        }
-
-        a {
-            color: #d4d4c9;
-            border-bottom: solid 2px #d4d4c9;
-            display: inline;
-            padding-bottom: 0px;
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: white;
-        }
-
-        footer {
-            border-top: #d4d4c9 dashed 2px;
-            margin-top: 25px;
-        }
-
-        article code {
-            background-color: #404040;
-            padding: 2px 5px 2px 5px;
-        }
-
-        article pre code {
-            background-color: #404040;
-            display: block;
-            overflow: auto;
-            padding: 10px;
-        }
-
-        p, pre, li {
-            line-height: 150%;
-        }
-
-        article blockquote {
-            font-style: italic;
-        }
-    </style>
     <link rel="alternate" type="application/rss+xml" title="@ViewBag.SiteName" href="/rss.xml" />
+    <link rel="stylesheet" href="/Content/css/poole.css">
+    <link rel="stylesheet" href="/Content/css/hyde.css">
+    <link rel="stylesheet" href="/Content/css/site.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 </head>
-<body>
-    <nav><a href="/">invokecommand.net</a> | <a href="/rss.xml">rss</a></nav>
-    @RenderBody()
-    <footer>
-        <p><a href="https://twitter.com/pbering">twitter.com/pbering</a>, <a href="https://github.com/pbering">github.com/pbering</a></p>
-    </footer>
+<body class="layout-reverse">
+    <div class="sidebar">
+        <div class="container sidebar-sticky">
+            <div class="sidebar-about">
+                <h2>
+                    <a href="/">
+                        invokecommand.net
+                    </a>
+                </h2>
+                <p class="lead">writing about code, devops and technology</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a class="sidebar-nav-item" href="https://twitter.com/pbering">twitter.com/pbering</a>
+                <a class="sidebar-nav-item" href="https://github.com/pbering">github.com/pbering</a>
+                <a class="sidebar-nav-item" href="http://invokecommand.net/rss.xml">RSS</a>
+            </nav>
+        </div>
+    </div>
+    <div class="content container">
+        @RenderBody()
+    </div>
 </body>
 </html>
