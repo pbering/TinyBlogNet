@@ -2,7 +2,7 @@
 title: Sitecore running in a Windows Server Container - Part 2
 summary: Tips and tricks for working with containers and hosts.
 date: 2015-12-18
-tags: Sitecore, Containers, WSC, Notes
+tags: Sitecore, Containers, Docker, Notes
 ---
 
 Here you can find some tips and tricks I picked up while playing around with this awesome new  Windows feature. You should also read [Part 1](/posts/sitecore-and-windows-server-containers) before this makes any sense :)

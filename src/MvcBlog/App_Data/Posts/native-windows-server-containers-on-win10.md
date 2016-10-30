@@ -2,7 +2,7 @@
 title: Native Windows Server Container support on Windows 10 is coming
 summary: Awesome Build 2016 announcements...
 date: 2016-04-02
-tags: Containers, WSC, Windows
+tags: Containers, Docker, Windows
 ---
 
 Build 2016 is now over and there was a few interesting things announced, my favorite is the "Windows Subsystem for Linux" which enables you to run native ELF binaries on Windows without any form of virtualization. See how it works and what to expect in the upcoming Windows 10 insider builds [here](https://channel9.msdn.com/Events/Build/2016/C906). Hanselman also has a cool video showing it off [here](http://www.hanselman.com/blog/DevelopersCanRunBashShellAndUsermodeUbuntuLinuxBinariesOnWindows10.aspx).

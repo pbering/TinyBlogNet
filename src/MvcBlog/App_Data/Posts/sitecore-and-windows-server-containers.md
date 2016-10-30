@@ -2,7 +2,7 @@
 title: Sitecore running in a Windows Server Container
 summary: The day finally came! It is now possible to run Sitecore (and other ASP.NET 4.6 apps) in a Windows Server Container.
 date: 2015-11-23
-tags: Sitecore, Containers, WSC
+tags: Sitecore, Containers, Docker
 ---
 
 ### Be sure to also read... ###
