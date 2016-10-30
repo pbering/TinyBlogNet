@@ -16,9 +16,9 @@ There are some issue though:
 
 1. Windows NAT and Docker is not working as with Linux container ie. you can't publish ports from containes to localhost. 
  So from your host you need to access the containers on the container IP instead of for example localhost:8000. You can access publish ports externally with the IP of the host though.
- More details here [https://blog.sixeyed.com/published-ports-on-windows-containers-dont-do-loopback/]() - I expect this to be "fixed" in future Windows version or for local development in "Docker for Windows".
+ More details here [https://blog.sixeyed.com/published-ports-on-windows-containers-dont-do-loopback/](https://blog.sixeyed.com/published-ports-on-windows-containers-dont-do-loopback/) - I expect this to be "fixed" in future Windows version or for local development in "Docker for Windows".
 2. Mixing Linux and Windows containers is not supoprted in Compose (yet?), so it is not possible to have both Linux and Windows containers in the same compose file communicating.
 
 But still we are now at a place where Sitecore and Docker can be used to easily and fast get a solution up and running, with data persistance through mapped volumes and also executing code inside the containers during development! All running natively on Windows :)
 
-You can see a complete end to end example of how to setup a Sitecore solution here: [https://github.com/pbering/Socker/]()
+You can see a complete end to end example of how to setup a Sitecore solution here: [https://github.com/pbering/Socker/](https://github.com/pbering/Socker/)
