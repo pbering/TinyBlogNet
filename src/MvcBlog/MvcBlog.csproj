@@ -163,6 +163,7 @@
     <Content Include="App_Data\Posts\sitecore-and-windows-server-containers-part-2.md" />
     <Content Include="App_Data\Posts\native-windows-server-containers-on-win10.md" />
     <Content Include="App_Data\Posts\sitecore-and-docker-today.md" />
+    <Content Include="App_Data\Posts\vs2017-docker-tooling-and-sitecore.md" />
     <None Include="Web.Production.config" />
   </ItemGroup>
   <ItemGroup />
